@@ -30,7 +30,7 @@ Base `<BASE_ID>`, table `<TABLE_ID>`. (Copying this setup? Replace these and the
 | Cost | fldhkHcHlKFRDqAsR | "CHF n" · "Free" · "Invite-only" · "TBC" |
 | Registration Link | fldeLthNufDpgbz2n | URL |
 | Link Status | fldKR6Rt6A3oplo4H | Confirmed · Confirmed - closed · Generic listing page — no direct event URL found (definitions in §5) |
-| Source | fldKpEsm6agO54S0N | ai-weeks.ch · hackevents.net · Luma · Meetup · Eventbrite · Organiser site · Deep Tech Nation · Women's network · Zurich AI Festival |
+| Source | fldKpEsm6agO54S0N | ai-weeks.ch · hackevents.net · Luma · Meetup · Eventbrite · Eventfrog · Organiser site · Deep Tech Nation · Women's network · Zurich AI Festival (if the Eventfrog option doesn't exist yet, leave Source blank and write "Found on Eventfrog" in Table Creator Action Required — never create the option) |
 | Why | fldcCHCiRgvjTEJG0 | one member-facing sentence |
 | Notes | fld23KV0dbAWW6FSq | member-facing practical facts |
 | Table Creator Action Required | fldLoFcgPsZbY4cfg | internal: what the owner must check |
@@ -69,7 +69,7 @@ Upcoming Approved rows: in FULL mode, open the link of those within 30 days; nev
 Tier 1 — every run:
 - https://ai-weeks.ch/events — primary calendar. Each event has its own page at ai-weeks.ch/events/<title-slug>-<YYYY-MM-DD> with a Register link to the organiser. Reach it via the listing's links, a "site:ai-weeks.ch <title>" search, or the slug-plus-date pattern (use only if it loads the right event). Don't conclude an ai-weeks.ch event has no registration until you've opened its event page.
 - https://www.hackevents.net/ch/cities/zurich, /basel, /geneva, /lausanne, /bern (city main pages; the per-tab pages often come back empty)
-- https://luma.com/discover/zurich/ai and https://luma.com/discover/geneva/ai
+- Luma — NEVER skipped, in either mode and whatever the budget: https://luma.com/discover/zurich/ai, https://luma.com/discover/geneva/ai, https://luma.com/zurich, https://luma.com/geneva, https://luma.com/lausanne. Luma listings and event pages usually show no date: for every AI-themed, in-window-looking item, open the event page and look for an allowed fallback date source (§5); list items whose date can't be verified in the summary rather than dropping them silently.
 - https://app.sprintd.org/series/hack-apertus — the authority on which Hack Apertus stops exist; each stop's sprintd page is its Registration Link. Don't add a stop that appears only on an aggregator.
 - https://techface.ch/events — the readable source for TechFace / women-in-tech events (use this instead of womentechswitzerland.com).
 - Meetup group iCal feeds — fetch `https://www.meetup.com/<group>/events/ical/` for each group: mindstone-zurich-ai-meetup, mindstone-geneva-ai-meetup, language-ai-meetup, ibmpoweraizurich, Zurich-Women-in-Machine-Learning-and-Data-Science, swiss-ai-group, PyData-Zurich, artifical-intelligence-zurich. An empty feed means no upcoming events, not a failure. The feed gives title, date/time and event URL but NO venue: open the event page (meetup.com/<group>/events/<id>/) for venue, cost and format. For Mindstone events, the community.mindstone.com/events/<slug> page loads without login and carries the Register button; it often shows no date, so take the date from the iCal feed and say so in Table Creator Action Required. If the iCal feed and the event page disagree on venue, use the event page and note the conflict.
@@ -77,7 +77,7 @@ Tier 1 — every run:
 Tier 2 — FULL mode only:
 - https://www.startupticker.ch/en/events, https://deeptechnation.ch/events/, https://dev.events/EU/CH, https://www.greaterzuricharea.com/en/events
 - https://ai-startup-center.com/news-events-technopark/ (often times out: one retry, then mark unreachable)
-- https://luma.com/zurich, https://luma.com/geneva, https://luma.com/lausanne
+- Eventfrog: https://eventfrog.ch/en/events.html?searchTerm=AI and https://eventfrog.ch/en/events.html?searchTerm=artificial%20intelligence. Noisy ("AI" also matches Appenzell Innerrhoden, Ai Weiwei, kids' camps) and mostly German or online, so apply the cheap filter hard. Individual pages (eventfrog.ch/en/p/…) show the full date with year, venue, organiser and ticket status ("Sale open – ends …"); the Eventfrog event page counts as a ticket shop and can be the Registration Link.
 - https://www.womenintechswitzerland.com/events
 - https://www.eventbrite.ch/b/switzerland--zurich/science-and-tech/ — low priority and noisy; dates on the listing have no year. Keep only titles containing AI / KI / artificial intelligence / machine learning / LLM / agent, then confirm date, year and venue on the individual eventbrite.ch/e/ page. Skip it if the run budget is tight.
 - Web searches (one each): "AI event Zurich [month year]", "AI event Geneva [month year]", "AI event Basel [month year]", "AI event Lausanne [month year]", "AI event Bern [month year]", "AI workshop Zurich", "AI hackathon Switzerland", "AI healthcare conference Switzerland", "AI fintech Switzerland", "AI legal Switzerland"
@@ -88,7 +88,7 @@ Tier 3 — FULL mode, first Monday of the month only:
 - One web search `site:meetup.com AI Zurich` (and `site:meetup.com AI Geneva`) to spot new AI Meetup groups. Don't add groups to the iCal list yourself; list new candidates in the summary for the owner.
 - Once a year (when a run falls in the 8 weeks before it): search for the #wetechtogether conference and add it if it passes the criteria — its own site can't be fetched.
 
-Known dead ends — don't spend calls on them: womentechswitzerland.com and wetechtogether.ch (block fetching — never work around a block), Eventbrite city search pages (/d/…), Meetup's /find search, Impact Hub Zurich's events page (JavaScript calendar, no events in the text — its events show up on Luma/ai-weeks.ch instead), luma.com/basel (unrelated calendar).
+Known dead ends — don't spend calls on them: womentechswitzerland.com and wetechtogether.ch (block fetching — never work around a block), Eventbrite city search pages (/d/…), Meetup's /find search, Impact Hub Zurich's events page (JavaScript calendar, no events in the text — its events show up on Luma/ai-weeks.ch instead), luma.com/basel (unrelated calendar), Eventfrog category pages such as /en/events/ch/digital-ai.html (silently fall back to the generic list) and api.eventfrog.net.
 
 If a source fails, note it and move on.
 
@@ -98,7 +98,7 @@ From the listing text alone, drop anything that: is already in the dedupe list (
 
 ### Budget
 
-At most 4 parallel subagents. Each gets: this full prompt, its assigned sources, the dedupe list, and a cap of 40 page fetches. Whole run: stop discovering at ~200 page fetches total (~80 in LIGHT mode), write what you've verified, and list what you skipped in the summary.
+Luma sources are never skipped for budget — if the budget is tight, drop Tier 2 non-Luma sources first. At most 4 parallel subagents. Each gets: this full prompt, its assigned sources, the dedupe list, and a cap of 40 page fetches. Whole run: stop discovering at ~200 page fetches total (~80 in LIGHT mode), write what you've verified, and list what you skipped in the summary.
 
 ### What subagents return
 
