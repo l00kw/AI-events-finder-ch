@@ -1,21 +1,42 @@
-# AI-events-finder-ch
+# AI Events Finder – Switzerland
 
-**EWAI AI Events – Switzerland**
+**A curated, AI-assisted list of AI events in Switzerland, kept in an Airtable table and checked by a person before anyone sees it.**
 
-A hand-checked list of in-person, English-language AI events in Switzerland, curated for [EWAI](#), a peer community for professional women navigating AI without a technical background.
+I built it for [European Women in AI (EWAI)](https://europeanwomeninai.com) and it's open to anyone in Switzerland who is learning AI and wants to find events worth their time. The focus is events where no technical background is assumed and where you get to talk with people, not just listen.
 
-- **Browse events:** the landing page (`index.html`, served with GitHub Pages) embeds the public table.
-- **How it works:** an AI assistant (Claude) scans event calendars on a schedule, following the rulebook in [`skill/ewai-event-scan/SKILL.md`](skill/ewai-event-scan/SKILL.md). It adds candidates to an Airtable table as *To review*. A person approves or rejects every row before members see it.
-- **What changed and why:** [`RELEASE_NOTES.md`](RELEASE_NOTES.md).
+- **See the events and how the table works:** <https://l00kw.github.io/AI-events-finder-ch/>
+- **What changed and why:** [`RELEASE_NOTES.md`](RELEASE_NOTES.md)
+- **Spotted a mistake or know an event we missed?** Use the form on the landing page, or [open an issue](https://github.com/l00kw/AI-events-finder-ch/issues/new/choose).
+
+Maintained by [Wendy Look](https://portfolio.wendylook.com).
+
+## How it works
+
+1. **Scan.** Twice a week, an AI assistant (Claude, run as a scheduled task) checks Swiss event calendars and Meetup groups. It follows a written rulebook: [`skill/ewai-event-scan/SKILL.md`](skill/ewai-event-scan/SKILL.md).
+2. **Verify.** For each candidate, it opens the organiser's own page and records the date, venue, price and registration link. When a fact isn't published, it writes "TBC" instead of guessing, and it re-checks links on events coming up soon.
+3. **Review.** New rows land in Airtable as *To review*. I approve or reject each one. The assistant never approves anything.
+4. **Publish.** The landing page shows a public view of the table that only includes approved rows.
+
+What gets in today: in-person events in Switzerland where AI is the main theme, run in English, with a working way to register. Pitch nights, investor events, job fairs and trade shows are left out. The full criteria are in §6 of the rulebook.
+
+## What's next
+
+These are planned and not yet live. See the release notes for status.
+
+- **Selected virtual events.** Learning opportunities that are skills-focused and not built around selling one product.
+- **German-language events.**
+- **"Not verified" instead of "To review"**, so it's clear when a person hasn't checked a row yet, plus a weekly reminder for the review.
+- **A feedback form** that writes straight to the table.
 
 ## Repository contents
 
 | Path | What it is |
 |---|---|
-| `index.html` | The landing page for members (GitHub Pages) |
-| `skill/ewai-event-scan/SKILL.md` | The rulebook: sources, inclusion criteria, tagging, verification and write rules |
+| `index.html` | The landing page (GitHub Pages) |
+| `skill/ewai-event-scan/SKILL.md` | The rulebook: sources, criteria, tagging, verification and write rules |
 | `RELEASE_NOTES.md` | Changes to the table, the rules and the scan, with the reason for each |
 | `CONTRIBUTING.md` | How to suggest events, sources or rule changes |
+| `.github/ISSUE_TEMPLATE/` | Templates for reporting a mistake or suggesting an event |
 | `LICENSE` | MIT |
 
 ## Copy this for your country
@@ -23,10 +44,10 @@ A hand-checked list of in-person, English-language AI events in Switzerland, cur
 1. **Table.** Create an Airtable base with the fields in §1 of `SKILL.md`. Make a public view filtered to `Status = Approved`, and hide the internal fields (Table Creator Action Required, Status, Added by). In the share settings, turn off "allow viewers to copy data / download CSV".
 2. **Config.** In `SKILL.md`, replace `<BASE_ID>`, `<TABLE_ID>` and the field IDs with your own (Airtable shows them in the API docs for your base).
 3. **Rules.** Change the country, cities, sources, language rule and audience to fit your community.
-4. **Run.** Connect Airtable to Claude and create a scheduled task that uses the contents of `SKILL.md` as its prompt (or add it as a skill and have the task run the skill).
-5. **Review.** Approve or reject rows yourself. The assistant never approves anything.
+4. **Run.** Connect Airtable to Claude and create a scheduled task that runs the skill (or uses `SKILL.md` as its prompt).
+5. **Review.** Approve or reject rows yourself. Plan the time for it: the scan finds more than you'd expect.
 
-Never commit API tokens. The base and table IDs are not secret on their own, but this repo uses placeholders so copies don't point at EWAI's table by mistake.
+Never commit API tokens. The base and table IDs aren't secret on their own, but this repo uses placeholders so copies don't point at this table by mistake.
 
 ## Setting up GitHub Pages
 

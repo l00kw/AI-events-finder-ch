@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EWAI AI Events</title>
-<meta name="description" content="A hand-checked list of in-person, English-language AI events in Switzerland, curated for the EWAI community.">
+<title>AI Events Finder – Switzerland</title>
+<meta name="description" content="A curated, AI-assisted list of AI events in Switzerland, checked by a person before it's published. Built for European Women in AI and open to anyone learning AI.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -13,46 +13,56 @@
   --accent:#8a3b5c; --accent-soft:#f4e7ed; --connect:#2f6b4f; --connect-soft:#e4f0e9; --learn:#2c4f7c; --learn-soft:#e5ecf6;
 }
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
+  :root{
     --bg:#16130f; --surface:#1f1b16; --ink:#f1ece4; --muted:#b4aa9c; --line:#352f27;
     --accent:#e08aad; --accent-soft:#3a2430; --connect:#8fd1ae; --connect-soft:#1f3329; --learn:#9dbbe6; --learn-soft:#1f2a3a;
   }
 }
-:root[data-theme="dark"]{
-  --bg:#16130f; --surface:#1f1b16; --ink:#f1ece4; --muted:#b4aa9c; --line:#352f27;
-  --accent:#e08aad; --accent-soft:#3a2430; --connect:#8fd1ae; --connect-soft:#1f3329; --learn:#9dbbe6; --learn-soft:#1f2a3a;
-}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Inter,system-ui,sans-serif}
 a{color:var(--accent)}
-.wrap{max-width:960px;margin:0 auto;padding:0 16px}
-header{padding:56px 0 32px}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 36px}
 .eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
 h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.2;margin:0 0 .5em}
-h1{font-size:clamp(32px,6vw,52px);max-width:16ch}
-h2{font-size:28px;margin-top:8px}
-h3{font-size:19px}
-.lede{font-size:19px;color:var(--muted);max-width:60ch}
+h1{font-size:clamp(34px,6vw,54px);max-width:16ch;margin-top:10px}
+h2{font-size:28px}
+h3{font-size:19px;margin-bottom:.3em}
+.lede{font-size:19px;color:var(--muted);max-width:62ch}
 .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
-.btn{display:inline-block;padding:12px 20px;border-radius:999px;font-weight:600;text-decoration:none;border:1px solid var(--accent)}
+.btn{display:inline-block;padding:12px 20px;border-radius:999px;font:600 16px Inter,system-ui,sans-serif;text-decoration:none;border:1px solid var(--accent);cursor:pointer}
 .btn.primary{background:var(--accent);color:var(--bg)}
-.btn.ghost{color:var(--accent)}
-section{padding:40px 0;border-top:1px solid var(--line)}
+.btn.ghost{background:transparent;color:var(--accent)}
+section{padding:44px 0;border-top:1px solid var(--line)}
+.intro{max-width:66ch}
 .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
 .card p{margin:0;color:var(--muted)}
 .tag{display:inline-block;font-size:13px;font-weight:600;padding:2px 10px;border-radius:999px;margin-bottom:8px}
 .tag.connect{background:var(--connect-soft);color:var(--connect)}
 .tag.learn{background:var(--learn-soft);color:var(--learn)}
+.tag.plain{background:var(--accent-soft);color:var(--accent)}
 .embed{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.embed iframe{display:block;width:100%;height:620px;border:0;background:transparent}
-.placeholder{padding:40px 20px;text-align:center;color:var(--muted)}
+.embed iframe{display:block;width:100%;height:640px;border:0;background:transparent}
+.small{font-size:15px;color:var(--muted)}
+.flow{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));counter-reset:step;margin:20px 0}
+.flow .card{position:relative;padding-top:44px}
+.flow .card::before{counter-increment:step;content:counter(step);position:absolute;top:14px;left:20px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--bg);font:600 13px/24px Inter,sans-serif;text-align:center}
+.who{font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
 ul.clean{padding-left:20px;margin:0}
 ul.clean li{margin:6px 0}
 ol.steps{padding-left:22px}
 ol.steps li{margin:10px 0}
-.note{background:var(--accent-soft);border-radius:12px;padding:16px 20px;color:var(--ink)}
+.note{background:var(--accent-soft);border-radius:12px;padding:16px 20px;color:var(--ink);margin-top:20px}
+.roadmap li{margin:10px 0}
+.pill{font-size:12px;font-weight:600;padding:1px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-left:6px;white-space:nowrap}
+form{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;gap:16px;max-width:640px}
+label{display:grid;gap:6px;font-weight:600;font-size:15px}
+label span.opt{font-weight:400;color:var(--muted)}
+input,select,textarea{font:400 16px Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+textarea{min-height:110px;resize:vertical}
 footer{padding:32px 0 56px;color:var(--muted);font-size:15px;border-top:1px solid var(--line)}
 code{font-size:.9em;background:var(--accent-soft);padding:1px 6px;border-radius:6px}
 </style>
@@ -61,73 +71,135 @@ code{font-size:.9em;background:var(--accent-soft);padding:1px 6px;border-radius:
 <div class="wrap">
 
 <header>
-  <div class="eyebrow">EWAI · AI events in Switzerland</div>
+  <div class="eyebrow">AI Events Finder · Switzerland</div>
   <h1>Find AI events worth your evening.</h1>
-  <p class="lede">A hand-checked list of in-person, English-language AI events across Switzerland, picked for professional women who want to understand and use AI without needing a technical background.</p>
+  <p class="lede">A curated list of AI events across Switzerland. An AI assistant does the searching, and a person checks every event before it's published. It's built for people learning AI who don't have a technical background and would rather talk with people than sit through a sales pitch.</p>
   <div class="btns">
     <a class="btn primary" href="#events">Browse events</a>
-    <a class="btn ghost" href="#how">How events are chosen</a>
+    <a class="btn ghost" href="#how">How it works</a>
+    <a class="btn ghost" href="#feedback">Give feedback</a>
   </div>
 </header>
 
+<section id="about">
+  <h2>What this is</h2>
+  <div class="grid">
+    <div class="card"><h3>A checked table, not a feed</h3><p>Each row is one event, with the date, place, price and registration link taken from the organiser's own page. Anything not published says "TBC" instead of a guess.</p></div>
+    <div class="card"><h3>Who it's for</h3><p>Professionals in Switzerland who want to learn AI and think critically about it, whatever their background. It started for members of European Women in AI and is open to everyone.</p></div>
+    <div class="card"><h3>Who's behind it</h3><p>Built and reviewed by Wendy Look, Vice President of <a href="https://europeanwomeninai.com">European Women in AI</a>. The rules, code and change history are public on <a href="https://github.com/l00kw/AI-events-finder-ch">GitHub</a>.</p></div>
+  </div>
+</section>
+
 <section id="events">
   <h2>Upcoming events</h2>
-  <p>Every event here has been opened, read and approved by a person before it appears. Click a row to see the details and the registration link.</p>
+  <p class="intro">Only events a person has approved appear here. Click a row to see its details and registration link. You can also filter by type, audience and topic.</p>
   <div class="embed">
-    <iframe class="airtable-embed" src="https://airtable.com/embed/appf5fJJr3UB5STfn/shr8ZoEDVV7zVR0Dx?viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
-    <div class="placeholder">The event table will appear here.</div>
+    <iframe class="airtable-embed" title="AI events in Switzerland (Airtable)" src="https://airtable.com/embed/appf5fJJr3UB5STfn/shr8ZoEDVV7zVR0Dx?viewControls=on" loading="lazy"></iframe>
   </div>
+  <p class="small">Table not loading? <a href="https://airtable.com/appf5fJJr3UB5STfn/shr8ZoEDVV7zVR0Dx">Open it in Airtable</a>.</p>
 </section>
 
 <section id="read">
   <h2>How to read the table</h2>
   <div class="grid">
-    <div class="card"><span class="tag connect">Connect</span><p>People talk to each other and no technical background is assumed: meetups, panels with an apéro, breakfasts, community nights.</p></div>
-    <div class="card"><span class="tag learn">Learn</span><p>Content first: conferences, talks, workshops and hackathons. For hackathons, the description says whether non-developers are welcome.</p></div>
-    <div class="card"><h3>For</h3><p>Who the organiser says it's for: Everyone, Business leaders, Founders, Product &amp; UX, Developers, Researchers, Healthcare or Security professionals.</p></div>
-    <div class="card"><h3>Link status</h3><p>"Confirmed" means the link opened this event's registration page on the date shown. "Closed" means it was full or closed when we last checked.</p></div>
+    <div class="card"><span class="tag connect">Connect</span><p>People talk to each other and no technical background is assumed: meetups, panels followed by an apéro, breakfasts, community nights.</p></div>
+    <div class="card"><span class="tag learn">Learn</span><p>Content first: conferences, talks, workshops and hackathons. For hackathons, Why says whether non-developers are welcome.</p></div>
+    <div class="card"><span class="tag plain">For</span><p>Who the organiser says it's for, such as Everyone, Business leaders, Founders, Product &amp; UX or Developers. "Everyone" is only used when the organiser says so.</p></div>
+    <div class="card"><span class="tag plain">Domain</span><p>What the event is about, such as AI Agents, AI at Work &amp; Productivity, or AI Governance, Ethics &amp; Law. Up to three per event.</p></div>
+    <div class="card"><span class="tag plain">Approx Size</span><p>Small (under 40), Medium (40–150) or Large (150+). It tells you whether a real conversation is likely. If the organiser doesn't state a size, it's an estimate.</p></div>
+    <div class="card"><span class="tag plain">Link Status</span><p>"Confirmed" means the link opened this event's registration page on the Last checked date. "Confirmed - closed" means it was full or closed at that check.</p></div>
   </div>
 </section>
 
 <section id="how">
-  <h2>How events are chosen</h2>
-  <p>An AI assistant scans event calendars on a regular schedule. It follows a written rulebook, and a person reviews everything before it goes live. An event makes the list only if:</p>
+  <h2>How it works</h2>
+  <p class="intro">The setup is deliberately simple: Airtable, a Claude scheduled task and a written rulebook. The human step is part of the design.</p>
+  <div class="flow">
+    <div class="card"><div class="who">Assistant · Mon &amp; Fri</div><h3>Scan</h3><p>Checks Swiss event calendars, Luma, Meetup groups and organiser sites against the rulebook.</p></div>
+    <div class="card"><div class="who">Assistant</div><h3>Verify</h3><p>Opens each event's own page and records the facts with "TBC" for anything missing. It also re-checks links for events coming up soon.</p></div>
+    <div class="card"><div class="who">Person</div><h3>Review</h3><p>Every new row arrives as "To review". Wendy approves or rejects it. The assistant can't approve anything.</p></div>
+    <div class="card"><div class="who">Public</div><h3>Publish</h3><p>Approved rows show up in the table on this page.</p></div>
+  </div>
+  <p>An event is added only if:</p>
   <ul class="clean">
     <li>it takes place in person, in Switzerland;</li>
     <li>AI is the main theme, not one panel inside a broader conference;</li>
-    <li>it is run in English (bilingual counts);</li>
+    <li>it's run in English (bilingual counts);</li>
     <li>it isn't a pitch night, investor event, job fair, trade show or student-only event;</li>
-    <li>there is a working way to register.</li>
+    <li>there's a working way to register.</li>
   </ul>
-  <p>Dates, prices and venues are taken from the organiser's own page. When something isn't published, the table says "TBC" rather than guessing. A missing event costs you little, but a wrong date costs you an evening, so we'd rather leave a field honest than complete.</p>
+  <p>Vendor-run events stay in when they're hands-on (workshops, labs), and the company is named. The full rules are in the <a href="https://github.com/l00kw/AI-events-finder-ch/blob/main/skill/ewai-event-scan/SKILL.md">rulebook</a>.</p>
   <div class="note">Always check the organiser's page before you go. Events change, and our last check may be a few days old.</div>
 </section>
 
-<section id="help">
-  <h2>Spotted a mistake, or know an event we missed?</h2>
-  <p>Tell us. Wrong dates and dead links are fixed first.</p>
-  <div class="btns">
-    <a class="btn primary" href="mailto:wlook@europeanwomeninai.com?subject=EWAI%20events%3A%20suggestion">Email us</a>
-    <a class="btn ghost" href="https://github.com/l00kw/AI-events-finder-ch/issues/new/choose">Open a GitHub issue</a>
-  </div>
+<section id="next">
+  <h2>What's next</h2>
+  <ul class="clean roadmap">
+    <li><strong>Selected virtual events</strong><span class="pill">planned</span><br><span class="small">Skills-focused learning that isn't built around selling one product.</span></li>
+    <li><strong>German-language events</strong><span class="pill">planned</span><br><span class="small">Some of the best small discussion events in Zurich run in German.</span></li>
+    <li><strong>"Not verified" label</strong><span class="pill">planned</span><br><span class="small">So you can tell when a person hasn't checked an event yet, plus a weekly review routine to keep the list fresh.</span></li>
+    <li><strong>Smaller, conversation-first events flagged</strong><span class="pill">planned</span><br><span class="small">A size limit for events where you can actually meet people.</span></li>
+  </ul>
+  <p class="small">Every change is logged, with the reason for it, in the <a href="https://github.com/l00kw/AI-events-finder-ch/blob/main/RELEASE_NOTES.md">release notes</a>.</p>
+</section>
+
+<section id="feedback">
+  <h2>Tell us what to fix or add</h2>
+  <p class="intro">Wrong date, dead link, an event we missed, or thoughts on whether this is useful: all of it helps. The form opens an email to Wendy with your answers filled in.</p>
+  <form id="fb">
+    <label>What's this about?
+      <select name="kind" required>
+        <option>A mistake in an event (date, place, price, link)</option>
+        <option>An event we missed</option>
+        <option>A calendar or group we should check</option>
+        <option>Feedback on the table or this page</option>
+      </select>
+    </label>
+    <label>Event or source name <span class="opt">(if any)</span>
+      <input name="ename" autocomplete="off">
+    </label>
+    <label>Link <span class="opt">(organiser's page, if any)</span>
+      <input name="link" type="url" placeholder="https://">
+    </label>
+    <label>Your message
+      <textarea name="msg" required></textarea>
+    </label>
+    <div class="btns" style="margin-top:0">
+      <button class="btn primary" type="submit">Send feedback</button>
+      <a class="btn ghost" href="https://github.com/l00kw/AI-events-finder-ch/issues/new/choose">Or open a GitHub issue</a>
+    </div>
+  </form>
 </section>
 
 <section id="copy">
   <h2>Want one for your country?</h2>
-  <p>Everything that runs this list is open: the rulebook the assistant follows, the source list and the table design. You can copy it for another country or city.</p>
+  <p>Everything that runs this list is open: the rulebook the assistant follows, the source list and the table design.</p>
   <ol class="steps">
     <li><strong>Copy the table.</strong> Create an Airtable base with the fields listed in the rulebook. Keep a public view that shows only approved rows.</li>
     <li><strong>Adapt the rulebook.</strong> In <code>skill/ewai-event-scan/SKILL.md</code>, change the country, cities, sources and language rule to fit your community.</li>
-    <li><strong>Run it on a schedule.</strong> Add the rulebook as a skill in Claude and set up a scheduled task that runs it, or run it by hand when you need it.</li>
-    <li><strong>Review before publishing.</strong> The assistant only adds rows as "To review". A person approves or rejects every one.</li>
+    <li><strong>Run it on a schedule.</strong> Add the rulebook as a skill in Claude and set up a scheduled task that runs it.</li>
+    <li><strong>Plan time to review.</strong> The assistant only suggests events. A person decides, and the scan finds more than you'd expect.</li>
   </ol>
   <div class="btns"><a class="btn ghost" href="https://github.com/l00kw/AI-events-finder-ch">See the repository</a></div>
 </section>
 
 <footer>
-  Curated by EWAI, a peer community for women navigating AI. See <a href="RELEASE_NOTES.md">release notes</a> for what has changed in the table and why.
+  Built by Wendy Look for <a href="https://europeanwomeninai.com">European Women in AI</a> and anyone learning AI in Switzerland. MIT licensed. See the <a href="https://github.com/l00kw/AI-events-finder-ch/blob/main/RELEASE_NOTES.md">release notes</a> for what changed and why.
 </footer>
 
 </div>
+<script>
+document.getElementById('fb').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var f = e.target;
+  var body = 'Type: ' + f.kind.value +
+    '\nEvent or source: ' + (f.ename.value || '-') +
+    '\nLink: ' + (f.link.value || '-') +
+    '\n\n' + f.msg.value;
+  location.href = 'mailto:wlook@europeanwomeninai.com' +
+    '?subject=' + encodeURIComponent('AI Events Finder: ' + f.kind.value) +
+    '&body=' + encodeURIComponent(body);
+});
+</script>
 </body>
 </html>
