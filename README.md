@@ -8,7 +8,7 @@ I built it for [European Women in AI (EWAI)](https://europeanwomeninai.com) and 
 - **What changed and why:** [`RELEASE_NOTES.md`](RELEASE_NOTES.md)
 - **Spotted a mistake or know an event we missed?** Use the form on the landing page, or [open an issue](https://github.com/l00kw/AI-events-finder-ch/issues/new/choose).
 
-Maintained by [Wendy Look](https://portfolio.wendylook.com).
+Maintained by [Wendy Look](https://www.linkedin.com/in/wendylook/).
 
 ## How it works
 
