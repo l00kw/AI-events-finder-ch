@@ -13,6 +13,20 @@ Each entry says **what** changed, **why**, and **who it affects** (people browsi
 
 ---
 
+## v1.3 · 4–5 Nov 2026 · Recurring series checked at the source, and shorter look-ahead windows
+
+- **What:**
+  - **Recurring series are checked every run.** The scan lists the series already in the table: the same event name on two or more rows, or a name with a session number or month (for example "#7" or "November AI Meetup"). It ignores series that are all Rejected or that last ran more than 60 days ago. For each series it opens the organiser's own events page once, or else the Luma calendar or the Meetup group feed, and adds upcoming sessions that aren't in the table yet, one row per session. A session's date still has to come from an allowed source. Luma calendars usually list sessions without dates, so they're not enough on their own.
+  - **Full runs (Monday):** the series check has no page limit and is never cut for budget, but only adds sessions dated in the next 30 days. Later sessions are picked up as they come into range.
+  - **Light runs (Friday):** only add events dated in the next 14 days, for both the main sources and recurring series. The series check stops after about 8 page loads, and the run summary lists any series it didn't reach. Re-checking links on rows already in the table works as before.
+  - Full runs still look 90 days ahead for one-off events.
+- **Why:**
+  - An AI Society Coffee Chat in Zurich on Fri 6 Nov was missing from the table. Its Luma page shows no date and it wasn't listed on hackevents.net or ai-weeks.ch, which is where the earlier sessions had been found. The date was only on the organiser's own page (ai-society.ch/events). Series like this tend to show up once on an aggregator and then drop off.
+  - The 30-day and 14-day windows: not recorded.
+- **Affects:** People browsing should see more sessions of regular meetups, closer to the date. Reviewers will see fewer far-off series sessions, and fewer new rows from Friday runs.
+
+---
+
 ## v1.2 · 5 Nov 2026 · Unreviewed events are public, and labelled as such
 
 - **What:**
