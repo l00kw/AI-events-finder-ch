@@ -142,12 +142,12 @@ These select options were replaced. The scan is told never to write them again. 
 
 | Field | Retired option | Replaced by | Why |
 |---|---|---|---|
-| For | Engineers & Researchers | Developers · Researchers (inferred) | Not recorded |
-| For | Healthcare, Cybersecurity | Healthcare professionals · Security professionals (inferred) | Not recorded |
-| For | Finance, Legal, Robotics | Domain field (inferred) | Not recorded |
-| Domain | Security | Cybersecurity (inferred) | Not recorded |
+| For | Engineers & Researchers | Developers · Researchers (inferred) | Some labeled events were only for Researchers or Developers, not both. Separate to make clearer target audience (i.e. "For" column) for events. |
+| For | Healthcare, Cybersecurity | Healthcare professionals · Security professionals (inferred) | Populates "For" column for Healthcare and Cybersecurity events. |
+| For | Finance, Legal, Robotics | Domain field (inferred) | Event audience is everyone, these three (Finance, Legal, Robotics) explain domain, not audience |
+| Domain | Security | Cybersecurity (inferred) | Same reason as the row above. |
 | Approx Size | Small-Medium, Large (600) | Small · Medium · Large | Not recorded. The three bands date from the first scan prompt, so these two were one-off values added to the table later. |
-| Link Status | From official programme, Unverified | Not recorded | Not recorded |
+| Link Status | From official programme, Unverified | Not recorded | Easier to understand, "Review state. New events from the weekly scan arrive as To review." |
 
 "Inferred" means the replacement exists in the table today, but the change itself wasn't written down.
 
