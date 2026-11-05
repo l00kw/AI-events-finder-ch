@@ -19,6 +19,7 @@ Each entry says **what** changed, **why**, and **who it affects** (people browsi
   - **The public table shows every event except rejected ones**, with **Status** now visible. It reads *Not verified* (only the scan has checked it) or *Verified* (a person has checked it). This was already how the view was filtered. Status was just hidden, so nobody could tell the difference.
   - **Labels renamed.** Status: To review → **Not verified**, Approved → **Verified**. The field "Link Status" was renamed **Registration**: Confirmed → **Open**, Confirmed - closed → **Closed**. The Registration column is now visible in the public view too.
   - **Events without their own registration page are no longer added.** Before, an event with only a calendar, listing or aggregator page could be added with the "Generic listing page" label. Now the scan skips it and lists it in its run summary so it can be added by hand. An organiser page with a visible register or join button still counts, even if the scan can't open the form.
+  - Added **Eventfrog** as a Source option.
   - **Weekly review reminder** every Monday evening. It lists unverified upcoming events, with date conflicts and link problems first.
 - **Why:**
   - Reviewing every row before publishing didn't keep up with the scan. 106 rows were waiting on 5 Nov. Showing them labelled means people hear about events early and can see what's been checked.
@@ -172,7 +173,6 @@ These select options were replaced. The scan is told never to write them again. 
 
 - **Review backlog.** As of 5 Nov, 106 of the scan's 134 rows haven't been reviewed by a person. They're public and labelled *Not verified*. The weekly reminder is there to bring this down.
 - **The scan's doubts aren't public.** Its notes on each row (for example "date differs between sources") are in an internal column. *Not verified* rows can look more certain than they are.
-- **Eventfrog isn't a Source option in the table yet.** Until it's added, the rulebook tells the scan to leave Source blank and flag the row.
 
 ---
 
