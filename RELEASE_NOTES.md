@@ -19,7 +19,10 @@ Each entry says **what** changed, **why**, and **who it affects** (people browsi
   - **The public table shows every event except rejected ones**, with **Status** now visible. It reads *Not verified* (only the scan has checked it) or *Verified* (a person has checked it). This was already how the view was filtered. Status was just hidden, so nobody could tell the difference.
   - **Labels renamed.** Status: To review → **Not verified**, Approved → **Verified**. The field "Link Status" was renamed **Registration**: Confirmed → **Open**, Confirmed - closed → **Closed**. The Registration column is now visible in the public view too.
   - **Events without their own registration page are no longer added.** Before, an event with only a calendar, listing or aggregator page could be added with the "Generic listing page" label. Now the scan skips it and lists it in its run summary so it can be added by hand. An organiser page with a visible register or join button still counts, even if the scan can't open the form.
+  - Removed the unused Registration option "Pattern-matched, not verified". No rows used it.
+  - Added short descriptions to the **Status** and **Registration** fields explaining each value, so they show when hovering over the column header in Airtable.
   - Added **Eventfrog** as a Source option.
+  - **Past events marked Verified in bulk.** The 53 unreviewed events dated before 5 Nov (3 Oct – 4 Nov) were set to *Verified* in one batch, to clear them out of the review queue. They were **not** individually reviewed. They're past, so they don't appear in the public view, and the record IDs were kept so the change can be undone.
   - **Weekly review reminder** every Monday evening. It lists unverified upcoming events, with date conflicts and link problems first.
 - **Why:**
   - Reviewing every row before publishing didn't keep up with the scan. 106 rows were waiting on 5 Nov. Showing them labelled means people hear about events early and can see what's been checked.
@@ -171,7 +174,8 @@ These select options were replaced. The scan is told never to write them again. 
 
 ## Known issues
 
-- **Review backlog.** As of 5 Nov, 106 of the scan's 134 rows haven't been reviewed by a person. They're public and labelled *Not verified*. The weekly reminder is there to bring this down.
+- **Review backlog.** As of 5 Nov, 53 upcoming events haven't been reviewed by a person. They're public and labelled *Not verified*. The weekly reminder is there to bring this down.
+- **"Verified" on past events isn't always a real review.** The 53 past events bulk-marked on 5 Nov (see v1.2) weren't checked one by one.
 - **The scan's doubts aren't public.** Its notes on each row (for example "date differs between sources") are in an internal column. *Not verified* rows can look more certain than they are.
 
 ---
