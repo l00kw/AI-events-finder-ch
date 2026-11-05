@@ -22,6 +22,7 @@ Each entry says **what** changed, **why**, and **who it affects** (people browsi
   - Removed the unused Registration option "Pattern-matched, not verified". No rows used it.
   - Added short descriptions to the **Status** and **Registration** fields explaining each value, so they show when hovering over the column header in Airtable.
   - Added **Eventfrog** as a Source option.
+  - **The public view shows "Day & Date" (with the weekday, e.g. "Tue, Nov 10 2026") instead of Date**, and Status moved to the last column. Sorting and filtering still use Date.
   - **Past events marked Verified in bulk.** The 53 unreviewed events dated before 5 Nov (3 Oct – 4 Nov) were set to *Verified* in one batch, to clear them out of the review queue. They were **not** individually reviewed. They're past, so they don't appear in the public view, and the record IDs were kept so the change can be undone.
   - **Weekly review reminder** every Monday evening. It lists unverified upcoming events, with date conflicts and link problems first.
 - **Why:**

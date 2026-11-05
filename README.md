@@ -36,6 +36,7 @@ These are planned and not yet live. See the release notes for status.
 | `RELEASE_NOTES.md` | Changes to the table, the rules and the scan, with the reason for each |
 | `CONTRIBUTING.md` | How to suggest events, sources or rule changes |
 | `.github/ISSUE_TEMPLATE/` | Templates for reporting a mistake or suggesting an event |
+| `.release-notes/airtable-setup.md` | Snapshot of the table's fields and views, used by the weekly release-notes check |
 | `LICENSE` | MIT |
 
 ## Copy this for your country
