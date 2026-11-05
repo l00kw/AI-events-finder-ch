@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Events Finder – Switzerland</title>
-<meta name="description" content="A curated, AI-assisted list of AI events in Switzerland, checked by a person before it's published. Built for European Women in AI and open to anyone learning AI.">
+<meta name="description" content="A curated, AI-assisted list of AI events in Switzerland. The scan finds and checks them, and a person verifies them weekly. Built for European Women in AI and open to anyone learning AI.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -73,7 +73,7 @@ code{font-size:.9em;background:var(--accent-soft);padding:1px 6px;border-radius:
 <header>
   <div class="eyebrow">AI Events Finder · Switzerland</div>
   <h1>Find AI events worth your evening.</h1>
-  <p class="lede">A curated list of AI events across Switzerland. An AI assistant does the searching, and a person checks every event before it's published. It's built for people learning AI who don't have a technical background and would rather talk with people than sit through a sales pitch.</p>
+  <p class="lede">A curated list of AI events across Switzerland. An AI assistant finds and checks them, and a person verifies them every week. Each event shows whether it has been verified yet. It's built for people learning AI who don't have a technical background and would rather talk with people than sit through a sales pitch.</p>
   <div class="btns">
     <a class="btn primary" href="#events">Browse events</a>
     <a class="btn ghost" href="#how">How it works</a>
@@ -84,7 +84,7 @@ code{font-size:.9em;background:var(--accent-soft);padding:1px 6px;border-radius:
 <section id="about">
   <h2>What this is</h2>
   <div class="grid">
-    <div class="card"><h3>A checked table, not a feed</h3><p>Each row is one event, with the date, place, price and registration link taken from the organiser's own page. Anything not published says "TBC" instead of a guess.</p></div>
+    <div class="card"><h3>A checked table, not just a feed</h3><p>Each row is one event, with the date, place, price and registration link taken from the organiser's own page. Anything not published says "TBC" instead of a guess.</p></div>
     <div class="card"><h3>Who it's for</h3><p>Professionals in Switzerland who want to learn AI and think critically about it, whatever their background. It started for members of European Women in AI and is open to everyone.</p></div>
     <div class="card"><h3>Who's behind it</h3><p>Built and reviewed by Wendy Look, Vice President of <a href="https://europeanwomeninai.com">European Women in AI</a>. The rules, code and change history are public on <a href="https://github.com/l00kw/AI-events-finder-ch">GitHub</a>.</p></div>
   </div>
@@ -92,7 +92,7 @@ code{font-size:.9em;background:var(--accent-soft);padding:1px 6px;border-radius:
 
 <section id="events">
   <h2>Upcoming events</h2>
-  <p class="intro">Only events a person has approved appear here. Click a row to see its details and registration link. You can also filter by type, audience and topic.</p>
+  <p class="intro">New events appear as soon as the scan finds them, so you hear about them early. <strong>Verified</strong> means a person has checked the event. <strong>Not verified</strong> means only the scan has checked it so far; these are reviewed weekly. Click a row to see its details and registration link, and filter by type, audience and topic.</p>
   <p class="small">Prefer a bigger view, or the table isn't loading? <a href="https://airtable.com/appf5fJJr3UB5STfn/shr8ZoEDVV7zVR0Dx" target="_blank" rel="noopener">Open it directly in Airtable</a>.</p>
   <div class="embed">
     <iframe class="airtable-embed" title="AI events in Switzerland (Airtable)" src="https://airtable.com/embed/appf5fJJr3UB5STfn/shr8ZoEDVV7zVR0Dx?viewControls=on" loading="lazy"></iframe>
@@ -107,7 +107,8 @@ code{font-size:.9em;background:var(--accent-soft);padding:1px 6px;border-radius:
     <div class="card"><span class="tag plain">For</span><p>Who the organiser says it's for, such as Everyone, Business leaders, Founders, Product &amp; UX or Developers. "Everyone" is only used when the organiser says so.</p></div>
     <div class="card"><span class="tag plain">Domain</span><p>What the event is about, such as AI Agents, AI at Work &amp; Productivity, or AI Governance, Ethics &amp; Law. Up to three per event.</p></div>
     <div class="card"><span class="tag plain">Approx Size</span><p>Small (under 40), Medium (40–150) or Large (150+). It tells you whether a real conversation is likely. If the organiser doesn't state a size, it's an estimate.</p></div>
-    <div class="card"><span class="tag plain">Link Status</span><p>"Confirmed" means the link opened this event's registration page on the Last checked date. "Confirmed - closed" means it was full or closed at that check.</p></div>
+    <div class="card"><span class="tag plain">Status</span><p>"Verified" means a person has checked the event. "Not verified" means only the scan has checked it so far. Double-check those on the organiser's page.</p></div>
+    <div class="card"><span class="tag plain">Registration</span><p>"Open" means the link opened this event's registration page on the Last checked date. "Closed" means it was full or closed at that check.</p></div>
   </div>
 </section>
 
@@ -117,8 +118,8 @@ code{font-size:.9em;background:var(--accent-soft);padding:1px 6px;border-radius:
   <div class="flow">
     <div class="card"><div class="who">Assistant · Mon &amp; Fri</div><h3>Scan</h3><p>Checks Swiss event calendars, Luma, Meetup groups and organiser sites against the rulebook.</p></div>
     <div class="card"><div class="who">Assistant</div><h3>Verify</h3><p>Opens each event's own page and records the facts with "TBC" for anything missing. It also re-checks links for events coming up soon.</p></div>
-    <div class="card"><div class="who">Person</div><h3>Review</h3><p>Every new row arrives as "To review". Wendy approves or rejects it. The assistant can't approve anything.</p></div>
-    <div class="card"><div class="who">Public</div><h3>Publish</h3><p>Approved rows show up in the table on this page.</p></div>
+    <div class="card"><div class="who">Person</div><h3>Review</h3><p>Every new row arrives as "Not verified". Wendy reviews them weekly and marks each one Verified or Rejected. The assistant can't verify anything.</p></div>
+    <div class="card"><div class="who">Public</div><h3>Publish</h3><p>New rows show up right away, labelled. Rejected rows are hidden.</p></div>
   </div>
   <p>An event is added only if:</p>
   <ul class="clean">
@@ -126,7 +127,7 @@ code{font-size:.9em;background:var(--accent-soft);padding:1px 6px;border-radius:
     <li>AI is the main theme, not one panel inside a broader conference;</li>
     <li>it's run in English (bilingual counts);</li>
     <li>it isn't a pitch night, investor event, job fair, trade show or student-only event;</li>
-    <li>there's a working way to register.</li>
+    <li>there's a page where you can register for this specific event. Events listed only on calendars or aggregator sites are left out.</li>
   </ul>
   <p>Vendor-run events stay in when they're hands-on (workshops, labs), and the company is named. The full rules are in the <a href="https://github.com/l00kw/AI-events-finder-ch/blob/main/skill/ewai-event-scan/SKILL.md">rulebook</a>.</p>
   <div class="note">Always check the organiser's page before you go. Events change, and our last check may be a few days old.</div>
@@ -137,8 +138,7 @@ code{font-size:.9em;background:var(--accent-soft);padding:1px 6px;border-radius:
   <ul class="clean roadmap">
     <li><strong>Selected virtual events</strong><span class="pill">planned</span><br><span class="small">Skills-focused learning that isn't built around selling one product.</span></li>
     <li><strong>German-language events</strong><span class="pill">planned</span><br><span class="small">Some of the best small discussion events in Zurich run in German.</span></li>
-    <li><strong>"Not verified" label</strong><span class="pill">planned</span><br><span class="small">So you can tell when a person hasn't checked an event yet, plus a weekly review routine to keep the list fresh.</span></li>
-    <li><strong>Smaller, conversation-first events flagged</strong><span class="pill">planned</span><br><span class="small">A size limit for events where you can actually meet people.</span></li>
+        <li><strong>Smaller, conversation-first events flagged</strong><span class="pill">planned</span><br><span class="small">A size limit for events where you can actually meet people.</span></li>
   </ul>
   <p class="small">Every change is logged, with the reason for it, in the <a href="https://github.com/l00kw/AI-events-finder-ch/blob/main/RELEASE_NOTES.md">release notes</a>.</p>
 </section>
@@ -175,7 +175,7 @@ code{font-size:.9em;background:var(--accent-soft);padding:1px 6px;border-radius:
   <h2>Want one for your country?</h2>
   <p>Everything that runs this list is open: the rulebook the assistant follows, the source list and the table design.</p>
   <ol class="steps">
-    <li><strong>Copy the table.</strong> Create an Airtable base with the fields listed in the rulebook. Keep a public view that shows only approved rows.</li>
+    <li><strong>Copy the table.</strong> Create an Airtable base with the fields listed in the rulebook. Decide what the public sees: only verified rows, or all rows with their status shown. This table shows everything except rejected rows.</li>
     <li><strong>Adapt the rulebook.</strong> In <code>skill/ewai-event-scan/SKILL.md</code>, change the country, cities, sources and language rule to fit your community.</li>
     <li><strong>Run it on a schedule.</strong> Add the rulebook as a skill in Claude and set up a scheduled task that runs it.</li>
     <li><strong>Plan time to review.</strong> The assistant only suggests events. A person decides, and the scan finds more than you'd expect.</li>

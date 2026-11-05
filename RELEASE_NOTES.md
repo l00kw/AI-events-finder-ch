@@ -13,6 +13,20 @@ Each entry says **what** changed, **why**, and **who it affects** (people browsi
 
 ---
 
+## v1.2 · 5 Nov 2026 · Unreviewed events are public, and labelled as such
+
+- **What:**
+  - **The public table shows every event except rejected ones**, with **Status** now visible. It reads *Not verified* (only the scan has checked it) or *Verified* (a person has checked it). This was already how the view was filtered. Status was just hidden, so nobody could tell the difference.
+  - **Labels renamed.** Status: To review → **Not verified**, Approved → **Verified**. The field "Link Status" was renamed **Registration**: Confirmed → **Open**, Confirmed - closed → **Closed**. The Registration column is now visible in the public view too.
+  - **Events without their own registration page are no longer added.** Before, an event with only a calendar, listing or aggregator page could be added with the "Generic listing page" label. Now the scan skips it and lists it in its run summary so it can be added by hand. An organiser page with a visible register or join button still counts, even if the scan can't open the form.
+  - **Weekly review reminder** every Monday evening. It lists unverified upcoming events, with date conflicts and link problems first.
+- **Why:**
+  - Reviewing every row before publishing didn't keep up with the scan. 106 rows were waiting on 5 Nov. Showing them labelled means people hear about events early and can see what's been checked.
+  - Rows linking to aggregator pages caused the most mistakes. Of the rows that relied on one, three turned out to be last year's events, and five were labelled "Confirmed" while linking only to an aggregator page.
+- **Affects:** Everyone. Treat *Not verified* events as leads and double-check them on the organiser's page. Reviewer: the weekly reminder replaces the ad-hoc review.
+
+---
+
 ## v1.1 · 5 Nov 2026 · Clearer about what this is and who it's for
 
 - **What:**
@@ -138,7 +152,7 @@ Individual dates weren't recorded. This entry compares the first scan prompt (mi
 
 ## Retired options
 
-These select options were replaced. The scan is told never to write them again. Some older rows still carry them. **The reasons weren't recorded**, so only the table owner can fill them in.
+These select options were replaced. The scan is told never to write them again. Some older rows still carry them. The table owner added the reasons on 5 Nov.
 
 | Field | Retired option | Replaced by | Why |
 |---|---|---|---|
@@ -147,6 +161,7 @@ These select options were replaced. The scan is told never to write them again. 
 | For | Finance, Legal, Robotics | Domain field (inferred) | Event audience is everyone, these three (Finance, Legal, Robotics) explain domain, not audience |
 | Domain | Security | Cybersecurity (inferred) | Same reason as the row above. |
 | Approx Size | Small-Medium, Large (600) | Small · Medium · Large | Not recorded. The three bands date from the first scan prompt, so these two were one-off values added to the table later. |
+| Registration (was Link Status) | Pattern-matched, not verified · Generic listing page — no direct event URL found | Nothing: events without their own registration page are no longer added | See v1.2. |
 | Link Status | From official programme, Unverified | Not recorded | Easier to understand, "Review state. New events from the weekly scan arrive as To review." |
 
 "Inferred" means the replacement exists in the table today, but the change itself wasn't written down.
@@ -155,8 +170,8 @@ These select options were replaced. The scan is told never to write them again. 
 
 ## Known issues
 
-- **Review backlog.** As of 5 Nov, 106 of the scan's 134 rows are still *To review*, and they aren't public until someone checks them. This is the main reason for the planned "Not verified" status and weekly reminder.
-- **The rulebook and the table use different names for one Link Status option.** Both names come from the September CSV: "Pattern-matched, not verified" and "Generic listing page — no direct event URL found". The table kept the first and the rulebook uses the second. One of them needs renaming so the scan doesn't create a stray option.
+- **Review backlog.** As of 5 Nov, 106 of the scan's 134 rows haven't been reviewed by a person. They're public and labelled *Not verified*. The weekly reminder is there to bring this down.
+- **The scan's doubts aren't public.** Its notes on each row (for example "date differs between sources") are in an internal column. *Not verified* rows can look more certain than they are.
 - **Eventfrog isn't a Source option in the table yet.** Until it's added, the rulebook tells the scan to leave Source blank and flag the row.
 
 ---
@@ -167,8 +182,7 @@ Agreed in principle and not live yet.
 
 - **Virtual events, selected.** Rule to settle first: is a vendor-hosted programme acceptable when the skills carry over to other tools? Do recordings count as events?
 - **German-language events,** and broader civic and academic sources.
-- **Status "To review" → "Not verified",** so it's visible when nobody has checked a row. This also needs the rulebook and scheduled task updated.
-- **A weekly review reminder** that lists new unverified rows with links.
+- **A public "Check before you go" note** for *Not verified* rows, showing the scan's main doubt in plain words.
 - **A capacity limit** to pick out small, conversation-first events within Connect.
 - **A feedback form** that writes straight to the table instead of email.
 

@@ -1,6 +1,6 @@
 ---
 name: ewai-event-scan
-description: Scan Swiss AI event sources and maintain the EWAI Airtable events table — find new in-person, English-language AI events in Switzerland, verify dates and registration links, re-check existing rows, and write them as "To review". Use when asked to run the EWAI event scan (full or light), re-check event links, or add events to the EWAI table.
+description: Scan Swiss AI event sources and maintain the EWAI Airtable events table — find new in-person, English-language AI events in Switzerland, verify dates and registration links, re-check existing rows, and write them as "Not verified". Use when asked to run the EWAI event scan (full or light), re-check event links, or add events to the EWAI table.
 ---
 
 # EWAI event scan
@@ -29,38 +29,40 @@ Base `<BASE_ID>`, table `<TABLE_ID>`. (Copying this setup? Replace these and the
 | Location | fldchXksj2JXEX2Jl | venue, city |
 | Cost | fldhkHcHlKFRDqAsR | "CHF n" · "Free" · "Invite-only" · "TBC" |
 | Registration Link | fldeLthNufDpgbz2n | URL |
-| Link Status | fldKR6Rt6A3oplo4H | Confirmed · Confirmed - closed · Generic listing page — no direct event URL found (definitions in §5) |
+| Registration | fldKR6Rt6A3oplo4H | Open · Closed (definitions in §5; field formerly named Link Status) |
 | Source | fldKpEsm6agO54S0N | ai-weeks.ch · hackevents.net · Luma · Meetup · Eventbrite · Eventfrog · Organiser site · Deep Tech Nation · Women's network · Zurich AI Festival (if the Eventfrog option doesn't exist yet, leave Source blank and write "Found on Eventfrog" in Table Creator Action Required — never create the option) |
 | Why | fldcCHCiRgvjTEJG0 | one member-facing sentence |
 | Notes | fld23KV0dbAWW6FSq | member-facing practical facts |
 | Table Creator Action Required | fldLoFcgPsZbY4cfg | internal: what the owner must check |
 | Last checked | fldPTzkNo1Q86tgCW | YYYY-MM-DD |
-| Status | fldS4AueH2OjCNYis | To review (you only ever write this) |
+| Status | fldS4AueH2OjCNYis | Not verified (you only ever write this). Others: Verified (checked by the owner), Rejected |
 | Added by | fld6g73JRrJInHL8a | Agent |
 | Added on | fldmhXlBgIw1RKaTd | TODAY |
 
-Rules: never create, rename or delete fields or select options; never write retired options (For: Healthcare, Finance, Cybersecurity, Legal, Robotics, Engineers & Researchers; Domain: Security; Size: Small-Medium, Large (600); Link Status: From official programme). Never modify a row whose Status is Approved or Rejected. When reading, request only the fields you need. Write in batches of up to 50 records.
+Rules: never create, rename or delete fields or select options; never write retired options (For: Healthcare, Finance, Cybersecurity, Legal, Robotics, Engineers & Researchers; Domain: Security; Size: Small-Medium, Large (600); Registration: From official programme, Pattern-matched, not verified, Generic listing page — no direct event URL found). Never modify a row whose Status is Verified or Rejected. When reading, request only the fields you need. Write in batches of up to 50 records.
+
+Label names are being renamed. Before writing, read the current options of Status and Registration and use whichever name exists: "Not verified" (old name "To review"), "Verified" (old name "Approved"), "Open" (old name "Confirmed"), "Closed" (old name "Confirmed - closed"). Never create an option to get the new name.
 
 Rows whose Table Creator Action Required starts with "Exception kept by table owner" were added by the owner despite a rule; don't treat them as a precedent for adding similar events.
 
 ## 2. Read the table
 
-One read of all rows with fields: Event Name, Date, Status, Registration Link, Link Status, Last checked, Domain. Build:
+One read of all rows with fields: Event Name, Date, Status, Registration Link, Registration, Last checked, Domain. Build:
 - a dedupe list (all statuses — Rejected means "already turned down, never re-add");
 - a link-check list (§3).
 
 ## 3. Link check on existing rows (both modes)
 
-Re-check an upcoming To review row only if at least one is true: its Date is within 14 days of TODAY; Link Status is not "Confirmed"; Last checked is empty or more than 7 days before TODAY. Skip all others — they were verified recently.
+Re-check an upcoming Not verified row only if at least one is true: its Date is within 14 days of TODAY; Registration is not "Open"; Last checked is empty or more than 7 days before TODAY. Skip all others — they were verified recently.
 
 For each row you re-check, open its Registration Link and:
-- broken (404, error, homepage, a different event or year) or an aggregator page → find the direct registration page (§5), update Registration Link + Link Status, explain in Table Creator Action Required;
-- registration closed or sold out → Link Status "Confirmed - closed", update Notes;
+- broken (404, error, homepage, a different event or year) or an aggregator page → find the direct registration page (§5), update Registration Link + Registration, explain in Table Creator Action Required. If no registration page for this event exists, write "recommend reject: no registration page for this event (checked YYYY-MM-DD)" in Table Creator Action Required — never delete rows;
+- registration closed or sold out → Registration "Closed", update Notes;
 - different date or venue on the page → correct it, explain in Table Creator Action Required;
 - Domain empty → fill it (§6);
 - always set Last checked = TODAY.
 
-Upcoming Approved rows: in FULL mode, open the link of those within 30 days; never edit them; list any problem in the summary.
+Upcoming Verified rows: in FULL mode, open the link of those within 30 days; never edit them; list any problem in the summary.
 
 ## 4. Find candidates
 
@@ -113,7 +115,7 @@ Every factual field needs the URL it was read on and a short verbatim quote. A f
 ## 5. Verify (main agent, before writing)
 
 You — not the subagents — are responsible for what goes into the table.
-- Re-open every registration_url you will mark "Confirmed" and check it shows this event's name (and date, where the page shows one). If it doesn't load or shows something else, it is not Confirmed.
+- Re-open every registration_url you will write and check it shows this event's name (and date, where the page shows one). If it doesn't load or shows something else, it is not a registration page.
 - Drop or flag any field whose quote is missing or doesn't support the value.
 
 Dates:
@@ -126,16 +128,16 @@ Registration links:
 - Must be opened and must load this exact event. No 404s, homepages, other years, login walls (use the public event page instead), or URLs you constructed and didn't open.
 - Prefer the event's own Luma/Eventbrite/Meetup page, ticket shop, or the organiser's page that carries the booking button.
 - Aggregators (ai-weeks.ch, hackevents.net, swissdataevents.ch, startupticker.ch, dev.events, women's-network listings, GitHub) are discovery sources, not registration links. Follow them to the organiser.
-- Only if no organiser page exists anywhere: use the event's own aggregator page (never a generic listing), Link Status "Generic listing page — no direct event URL found", and say in Table Creator Action Required that members can't register from it. No event-specific page at all → don't add; list in summary.
+- No registration page for this specific event (only a listing, a calendar, or an aggregator page about the event) → don't add it. List it in the summary under "Skipped: no registration page" with name, date and the page where you saw it, so the owner can add it by hand.
+- An organiser page with a visible register / join / sign-up button or clear sign-up instructions counts as a registration page, even if the form behind it won't open for you. Add the event and write "registration button not opened — check it" in Table Creator Action Required.
 
-Link Status:
-Link Status says whether the Registration Link goes to a page where members can register for THIS event, as of Last checked. The organiser's own page counts as a registration page.
-- Confirmed — you opened the link, it shows this event, and members can register or request a place now (approval required and request-to-join count as open).
-- Confirmed - closed — same page, but registration is closed, sold out or waiting-list only. Put the detail in Notes ("Sold out, waiting list open, checked YYYY-MM-DD").
-- Generic listing page — no direct event URL found — the best link is a listing or aggregator page, or a page that gives this event no place of its own. Say in Table Creator Action Required that members can't register from it.
-- Confirmed never means the event is happening; it means the link goes to this event's registration page. If only some ticket types are sold out, stay Confirmed and name the sold-out ones in Notes.
-- Update Link Status on every check, in both directions: sold out → Confirmed - closed; reopened → Confirmed.
-- If the page can't be read (JavaScript-only page, login wall, error): a new row is not added (list it in the summary); on an existing row leave Link Status as it is, write "link not verifiable (checked YYYY-MM-DD)" in Table Creator Action Required, and set Last checked.
+Registration:
+Registration says whether people can register for THIS event through the Registration Link, as of Last checked. The organiser's own page counts as a registration page.
+- Open — you opened the link, it shows this event, and people can register or request a place now (approval required and request-to-join count as open).
+- Closed — same page, but registration is closed, sold out or waiting-list only. Put the detail in Notes ("Sold out, waiting list open, checked YYYY-MM-DD").
+- Open never means the event is happening; it means the link goes to this event's registration page. If only some ticket types are sold out, stay Open and name the sold-out ones in Notes.
+- Update Registration on every check, in both directions: sold out → Closed; reopened → Open.
+- If the page can't be read (JavaScript-only page, login wall, error): a new row is not added (list it in the summary); on an existing row leave Registration as it is, write "link not verifiable (checked YYYY-MM-DD)" in Table Creator Action Required, and set Last checked.
 
 Never infer:
 - Language: an English web page doesn't mean an English event. If the event language isn't stated, flag "language not stated" in Table Creator Action Required.
@@ -153,12 +155,12 @@ Add an event only if all are true:
 5. Not a recruiting fair, trade show or student-only event. Vendor-run events with practical content (hands-on labs, workshops, masterclasses) are welcome — name the company in Why. Exclude pure sales pitches and booth expos.
 6. Not an investor, pitch or fundraising event (pitch nights, investor summits/days, VC nights, investor/executive dinners, founder–investor matchmaking) — these are investor-community discussions, not practical AI knowledge for members.
 7. Not a templated or low-quality listing (copied text mentioning another country, "TBD" venue with many identical dates, "AI SaaS / prompt to profit" lead-gen series).
-8. Has a working way to register or attend.
+8. Has a registration page for this specific event (§5).
 9. Not already in the table (any status).
 
 Technical events (developer meetups, hackathons, research talks) are allowed; tag For accurately so members can filter.
 
-Borderline (probably passes, something uncertain) → add as To review and explain in Table Creator Action Required in one or two plain sentences; if you think it likely fails, write "recommend reject" and the rule. Clearly failing → don't add; mention in the summary only if it was close.
+Borderline (probably passes, something uncertain) → add as Not verified and explain in Table Creator Action Required in one or two plain sentences; if you think it likely fails, write "recommend reject" and the rule. Clearly failing → don't add; mention in the summary only if it was close.
 
 Type:
 - Connect — people talk to each other and no technical background is assumed: panel with apéro/networking, meetup, breakfast/lunch roundtable, community night, networking evening, small conference under ~150. Never for conferences over ~300 people or over CHF 400.
@@ -174,7 +176,7 @@ Generative AI & LLMs · AI Agents · AI at Work & Productivity · AI Strategy & 
 
 Category: Meetup (recurring, informal) · Panel + Apéro (talk then networking) · Small Group (<40) · Networking (connection is the purpose) · Large Conference (150+) · Hackathon · Workshop (hands-on, leave with a skill) · Talk (no networking window) · Public & Community (open to the public, tours/demos/culture). Approx Size: Small <40 · Medium 40–150 · Large 150+.
 
-Dedupe: same event = names match after removing punctuation and case, and dates within 1 day. Same name but dates more than a day apart → open the existing row's Registration Link before deciding: if the existing To review row's date is wrong, correct it (no new row) and explain; if the row is Approved/Rejected, don't touch it and report it; add a new row only when the pages show genuinely separate sessions (e.g. different URL per session). Recurring series (e.g. monthly Mindstone meetups): one row per dated session.
+Dedupe: same event = names match after removing punctuation and case, and dates within 1 day. Same name but dates more than a day apart → open the existing row's Registration Link before deciding: if the existing Not verified row's date is wrong, correct it (no new row) and explain; if the row is Verified/Rejected, don't touch it and report it; add a new row only when the pages show genuinely separate sessions (e.g. different URL per session). Recurring series (e.g. monthly Mindstone meetups): one row per dated session.
 
 ## 7. Write
 
@@ -182,17 +184,18 @@ For each new event fill every field in §1. Field content rules:
 - Why — one sentence for members: what it is plus useful facts from the page (named speakers, who runs it, discount code, women-only, non-developers welcome, bring a laptop, multi-day range). No doubts, no internal commentary.
 - Notes — practical facts with the date checked (approval required, waitlist, "2 spots left, checked YYYY-MM-DD", apply-by date, unusual way to register, venue outside the centre). Blank if none. No doubts.
 - Table Creator Action Required — blank if the event passed every rule cleanly; otherwise what the owner should check. All doubts go here and only here.
-- Last checked = TODAY; Status = To review; Added by = Agent; Added on = TODAY.
+- Last checked = TODAY; Status = Not verified; Added by = Agent; Added on = TODAY.
 
 ## 8. Finish
 
 Write the summary:
 - run mode; events added by Type and by Source; how many have something in Table Creator Action Required
 - existing rows fixed (link, date, venue, registration status)
-- Approved rows with problems (not modified)
+- Verified rows with problems (not modified)
+- Skipped: no registration page — one line each: name, date, where you saw it
 - close calls excluded, one line each with the rule
 - sources that failed, were empty or were skipped for budget
 - new Meetup groups spotted (Tier 3 months only)
 - months in the window with zero Connect events
 
-Then notify: send exactly one push notification with the summary inside <routine_summary> tags (most important sentence first) — but only if at least one is true: events were added; an existing row was fixed; an Approved row has a problem; a Tier 1 source failed; the run couldn't complete. Otherwise send nothing. Post nowhere else and message no one else.
+Then notify: send exactly one push notification with the summary inside <routine_summary> tags (most important sentence first) — but only if at least one is true: events were added; an existing row was fixed; a Verified row has a problem; a Tier 1 source failed; the run couldn't complete. Otherwise send nothing. Post nowhere else and message no one else.

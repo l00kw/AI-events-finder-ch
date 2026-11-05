@@ -1,6 +1,6 @@
 # AI Events Finder – Switzerland
 
-**A curated, AI-assisted list of AI events in Switzerland, kept in an Airtable table and checked by a person before anyone sees it.**
+**A curated, AI-assisted list of AI events in Switzerland, kept in an Airtable table. The scan finds and checks events, and I verify them every week.**
 
 I built it for [European Women in AI (EWAI)](https://europeanwomeninai.com) and it's open to anyone in Switzerland who is learning AI and wants to find events worth their time. The focus is events where no technical background is assumed and where you get to talk with people, not just listen.
 
@@ -14,10 +14,10 @@ Maintained by [Wendy Look](https://www.linkedin.com/in/wendylook/).
 
 1. **Scan.** Twice a week, an AI assistant (Claude, run as a scheduled task) checks Swiss event calendars and Meetup groups. It follows a written rulebook: [`skill/ewai-event-scan/SKILL.md`](skill/ewai-event-scan/SKILL.md).
 2. **Verify.** For each candidate, it opens the organiser's own page and records the date, venue, price and registration link. When a fact isn't published, it writes "TBC" instead of guessing, and it re-checks links on events coming up soon.
-3. **Review.** New rows land in Airtable as *To review*. I approve or reject each one. The assistant never approves anything.
-4. **Publish.** The landing page shows a public view of the table that only includes approved rows.
+3. **Publish.** New rows go public straight away, labelled *Not verified*, so people hear about events early. Rejected rows are hidden.
+4. **Review.** Every Monday a reminder lists the unverified rows, date and link problems first. I mark each one *Verified* or *Rejected*. The assistant never verifies anything.
 
-What gets in today: in-person events in Switzerland where AI is the main theme, run in English, with a working way to register. Pitch nights, investor events, job fairs and trade shows are left out. The full criteria are in §6 of the rulebook.
+What gets in today: in-person events in Switzerland where AI is the main theme, run in English, with a page where you can register for that specific event (events listed only on calendars or aggregator sites are left out). Pitch nights, investor events, job fairs and trade shows are left out. The full criteria are in §6 of the rulebook.
 
 ## What's next
 
@@ -25,7 +25,6 @@ These are planned and not yet live. See the release notes for status.
 
 - **Selected virtual events.** Learning opportunities that are skills-focused and not built around selling one product.
 - **German-language events.**
-- **"Not verified" instead of "To review"**, so it's clear when a person hasn't checked a row yet, plus a weekly reminder for the review.
 - **A feedback form** that writes straight to the table.
 
 ## Repository contents
@@ -41,7 +40,7 @@ These are planned and not yet live. See the release notes for status.
 
 ## Copy this for your country
 
-1. **Table.** Create an Airtable base with the fields in §1 of `SKILL.md`. Make a public view filtered to `Status = Approved`, and hide the internal fields (Table Creator Action Required, Status, Added by). In the share settings, turn off "allow viewers to copy data / download CSV".
+1. **Table.** Create an Airtable base with the fields in §1 of `SKILL.md`. Make a public view that either shows only `Status = Verified`, or (like this one) shows everything except `Rejected` with Status visible. Hide the internal fields (Table Creator Action Required, Added by). In the share settings, turn off "allow viewers to copy data / download CSV".
 2. **Config.** In `SKILL.md`, replace `<BASE_ID>`, `<TABLE_ID>` and the field IDs with your own (Airtable shows them in the API docs for your base).
 3. **Rules.** Change the country, cities, sources, language rule and audience to fit your community.
 4. **Run.** Connect Airtable to Claude and create a scheduled task that runs the skill (or uses `SKILL.md` as its prompt).
