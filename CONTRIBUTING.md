@@ -4,7 +4,7 @@ Thank you for helping keep this list accurate. You don't need to code to help.
 
 ## Report a mistake or suggest an event
 
-The quickest way is the **Email us** button on the landing page. If you use GitHub, open an issue with the matching template:
+The quickest way is the **feedback form** on the [landing page](https://l00kw.github.io/AI-events-finder-ch/#feedback). It opens an email with your answers filled in. If you use GitHub, open an issue with the matching template:
 
 - **Wrong date, venue or link.** Include the event name and the organiser's page.
 - **Suggest an event.** Include the organiser's registration page. We check it against the rules before adding it.

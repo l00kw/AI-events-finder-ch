@@ -10,8 +10,8 @@ You maintain an Airtable table of AI events in Switzerland for EWAI, a Swiss pee
 ## 0. Setup (do this first)
 
 1. Run `TZ=Europe/Zurich date +"%Y-%m-%d %u"` and write the result at the top of your notes as TODAY and WEEKDAY (1 = Monday). Use TODAY for "Added on", "Last checked" and all "checked YYYY-MM-DD" notes. TODAY is never an event date.
-2. Run mode: WEEKDAY = 1 (Monday) or any day other than Friday → FULL. WEEKDAY = 5 (Friday) → LIGHT. LIGHT = Tier 1 sources + link check only.
-3. Window: events dated TODAY through TODAY + 90 days, physically in Switzerland.
+2. Run mode: WEEKDAY = 1 (Monday) or any day other than Friday → FULL. WEEKDAY = 5 (Friday) → LIGHT. LIGHT = Tier 1 sources + recurring-series check + link check only.
+3. Window: events physically in Switzerland, dated TODAY through TODAY + 90 days in FULL mode, or TODAY through TODAY + 14 days in LIGHT mode (new events only; the link check in §3 is unchanged). Exception: in FULL mode, recurring-series sessions use a 30-day window (§4).
 
 ## 1. Airtable reference (use these IDs; don't rediscover the schema)
 
@@ -90,6 +90,12 @@ Tier 3 — FULL mode, first Monday of the month only:
 - One web search `site:meetup.com AI Zurich` (and `site:meetup.com AI Geneva`) to spot new AI Meetup groups. Don't add groups to the iCal list yourself; list new candidates in the summary for the owner.
 - Once a year (when a run falls in the 8 weeks before it): search for the #wetechtogether conference and add it if it passes the criteria — its own site can't be fetched.
 
+Recurring series — every run (both modes):
+- From the table read (§2), list the recurring series: the same normalised event name on two or more rows, or a name with a session number or month (e.g. "#7", "November AI Meetup"), with at least one session dated in the last 60 days or later. Ignore series whose rows are all Rejected.
+- For each series, open its organiser's own calendar once: the organiser's events page if one exists (find it via the link on an existing row's Luma/Meetup page, e.g. ai-society.ch/events for AI Society Coffee Chats), otherwise the Luma calendar page (luma.com/calendar/…) or the Meetup group's iCal feed. Add every session not already in the table that falls in this step's window (FULL mode: TODAY through TODAY + 30 days; LIGHT mode: TODAY through TODAY + 14 days), one row per session, each with its own registration link, opened and verified as in §5.
+- Luma calendar pages usually list sessions without dates; a session's date must still come from an allowed source (§5) — the organiser's events page counts as the organiser's site.
+- FULL mode: no cap — check every series, add only sessions dated within the next 30 days (later sessions are picked up by later runs), and this step is never skipped or cut short for budget. LIGHT mode: about 8 page fetches for this step; if you hit that, list the series you didn't check in the summary.
+
 Known dead ends — don't spend calls on them: womentechswitzerland.com and wetechtogether.ch (block fetching — never work around a block), Eventbrite city search pages (/d/…), Meetup's /find search, Impact Hub Zurich's events page (JavaScript calendar, no events in the text — its events show up on Luma/ai-weeks.ch instead), luma.com/basel (unrelated calendar), Eventfrog category pages such as /en/events/ch/digital-ai.html (silently fall back to the generic list) and api.eventfrog.net.
 
 If a source fails, note it and move on.
@@ -100,7 +106,7 @@ From the listing text alone, drop anything that: is already in the dedupe list (
 
 ### Budget
 
-Luma sources are never skipped for budget — if the budget is tight, drop Tier 2 non-Luma sources first. At most 4 parallel subagents. Each gets: this full prompt, its assigned sources, the dedupe list, and a cap of 40 page fetches. Whole run: stop discovering at ~200 page fetches total (~80 in LIGHT mode), write what you've verified, and list what you skipped in the summary.
+Luma sources (and, in FULL mode, the recurring-series check) are never skipped for budget — if the budget is tight, drop Tier 2 non-Luma sources first. At most 4 parallel subagents. Each gets: this full prompt, its assigned sources, the dedupe list, and a cap of 40 page fetches. Whole run: stop discovering at ~200 page fetches total (~80 in LIGHT mode), write what you've verified, and list what you skipped in the summary.
 
 ### What subagents return
 
@@ -195,6 +201,7 @@ Write the summary:
 - Skipped: no registration page — one line each: name, date, where you saw it
 - close calls excluded, one line each with the rule
 - sources that failed, were empty or were skipped for budget
+- recurring series checked, new sessions added from them, and any series not checked (LIGHT mode)
 - new Meetup groups spotted (Tier 3 months only)
 - months in the window with zero Connect events
 
