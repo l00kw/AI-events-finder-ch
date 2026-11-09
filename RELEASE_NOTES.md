@@ -13,6 +13,24 @@ Each entry says **what** changed, **why**, and **who it affects** (people browsi
 
 ---
 
+## v1.4 · 2026-11-09 · New Status option, column order, and a new scan time
+
+- **What:**
+  - **Table**
+    - ⚠ Status has a new option "https://luma.com/ht3s8136" (an event link, alongside Not verified, Verified and Rejected).
+    - The Why field moved up to third place, right after Event Name. The public view (Grid view) now shows Why third too, before Domain.
+    - All columns view: no longer shows Date; now shows For (after Registration Link).
+  - **Scheduled scan**
+    - Scheduled scan: now runs Monday and Friday at 05:32 Zurich time, all year (was 05:00 UTC, i.e. 06:00 Zurich in winter and 07:00 in summer). Instructions, model and notifications are unchanged.
+- **Why:**
+  - New Status option: **To fill in:** why did you make this change?
+  - Why column moved: **To fill in:** why did you make this change?
+  - All columns view: **To fill in:** why did you make this change?
+  - Scan time: **To fill in:** why did you make this change?
+- **Affects:** People browsing see Why earlier in the public table; the reviewer, if the new Status option is used on rows; scan results now arrive at the same local time year-round. (check)
+
+---
+
 ## v1.3 · 4–5 Nov 2026 · Recurring series checked at the source, and shorter look-ahead windows
 
 - **What:**

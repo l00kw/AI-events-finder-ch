@@ -2,10 +2,10 @@
 
 Used by the weekly release-notes check to spot changes to the scheduled scan. Generated, don't edit by hand. Airtable IDs are replaced with placeholders.
 
-Taken: 2026-11-05
+Taken: 2026-11-09
 
 - **Name:** EWAI event scan (Mon & Fri)
-- **Schedule:** `0 5 * * 1,5` (UTC): Monday and Friday at 05:00 UTC, which is 06:00 in Zurich in winter and 07:00 in summer
+- **Schedule:** `CRON_TZ=Europe/Zurich 32 5 * * 1,5`: Monday and Friday at 05:32 Zurich time, all year
 - **Enabled:** yes
 - **Model:** claude-opus-5-5
 - **Notifications:** push, email
