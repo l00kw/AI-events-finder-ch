@@ -13,6 +13,18 @@ Each entry says **what** changed, **why**, and **who it affects** (people browsi
 
 ---
 
+## v1.4.1 · 10 Nov 2026 · Online events: time window replaces the Europe-host test
+
+- **What:**
+  - An online event no longer needs a Swiss or European host, or a page saying it's for Europe. It needs to **start between 08:00 and 21:00 Zurich time**, be interactive, and not be tied to one vendor's product.
+  - The vendor rule is now stricter online: if taking part requires one company's product (for example "download X to hack along"), the event is out, even when it's hands-on.
+  - The AI Collective's Luma calendar is now an online source. The scan keeps only its virtual sessions.
+  - Maven's free lessons are not a source, because each one promotes a paid course. The owner can add one by hand.
+- **Why:** A test run of the rule against real listings showed the host's location was the wrong test. A US-run session at 20:00 Zurich time works fine for people here, while the rule rejected it. What matters is whether someone in Switzerland can join live and take part.
+- **Affects:** People browsing may see more online sessions run from outside Europe, all at workable hours. Reviewer: slightly more online rows to check.
+
+---
+
 ## v1.4 · 10 Nov 2026 · Online events, on trial
 
 - **What:**
