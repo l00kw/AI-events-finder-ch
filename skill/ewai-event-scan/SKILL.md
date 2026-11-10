@@ -1,6 +1,6 @@
 ---
 name: ewai-event-scan
-description: Scan Swiss AI event sources and maintain the EWAI Airtable events table — find new English-language AI events in Switzerland plus Europe-relevant online events, verify dates and registration links, re-check existing rows, and write them as "Not verified". Use when asked to run the EWAI event scan (full or light), re-check event links, or add events to the EWAI table.
+description: Scan Swiss AI event sources and maintain the EWAI Airtable events table — find new English-language AI events in Switzerland plus online events held at times that suit Zurich, verify dates and registration links, re-check existing rows, and write them as "Not verified". Use when asked to run the EWAI event scan (full or light), re-check event links, or add events to the EWAI table.
 ---
 
 # EWAI event scan
@@ -97,9 +97,11 @@ Recurring series — every run (both modes):
 - Luma calendar pages usually list sessions without dates; a session's date must still come from an allowed source (§5) — the organiser's events page counts as the organiser's site.
 - FULL mode: no cap — check every series, add only sessions dated within the next 30 days (later sessions are picked up by later runs), and this step is never skipped or cut short for budget. LIGHT mode: about 8 page fetches for this step; if you hit that, list the series you didn't check in the summary.
 
-Online events — FULL mode only (trial, started 2026-11-10):
+Online events — FULL mode only (trial, started 2026-11-10; time-only rule since 2026-11-10):
 - Online events that turn up in any source above are candidates; don't skip them for being online.
-- Web searches (one each): "AI webinar Europe [month year]", "AI online event CET [month year]", "online AI meetup Europe women [month year]", "site:luma.com AI online Europe".
+- The AI Collective's Luma calendar, https://luma.com/genai-collective: keep only sessions marked Virtual, Google Meet or Zoom (Luma may list a virtual session's location as unknown, so open the event page to check). Most of its events are in person outside Switzerland; skip those.
+- Web searches (one each): "AI webinar [month year]", "AI online event CET [month year]", "online AI meetup women [month year]", "site:luma.com AI virtual [month year]".
+- Maven free lessons are not a source: each promotes a paid course. The owner adds one by hand if she wants it.
 - Recurring online series already in the table are covered by the recurring-series check.
 - Cap: about 20 page fetches for online discovery; online candidates never displace Luma or the recurring-series check.
 
@@ -109,7 +111,7 @@ If a source fails, note it and move on.
 
 ### Cheap filter before opening any event page
 
-From the listing text alone, drop anything that: is already in the dedupe list (same normalised name, date within 1 day) or Rejected; is dated outside the window; is titled or described only in German/French/Italian; is online but clearly fails the online rule (§6) — e.g. a product demo or a host and audience outside Europe; is a pitch night, investor event or job fair; is clearly not about AI. Only open event pages for what remains.
+From the listing text alone, drop anything that: is already in the dedupe list (same normalised name, date within 1 day) or Rejected; is dated outside the window; is titled or described only in German/French/Italian; is online but clearly fails the online rule (§6) — e.g. a product demo or a start time outside 08:00–21:00 Zurich time; is a pitch night, investor event or job fair; is clearly not about AI. Only open event pages for what remains.
 
 ### Budget
 
@@ -172,11 +174,10 @@ Add an event only if all are true:
 9. Not already in the table (any status).
 
 Online rule — an Online event passes only if all are true:
-- Europe-relevant: the host is a Swiss or European organisation or community, OR the page or audience description explicitly says it is for people in Europe / European time zones (e.g. "EU edition", times given in CET/CEST, "for Europe-based"). Quote the wording in the subagent return.
 - Interactive: at least live Q&A, discussion, breakouts, demos by participants or hands-on work. Broadcast-only keynotes and large livestreams fail.
-- Starts between 08:00 and 21:00 Zurich time. If only a non-European time zone is given, convert it; if no time is stated, add it and flag "start time not stated".
-- Not a product sales webinar or a session promoting one vendor's tool. Keep it AI-skills agnostic (vendor-run practical sessions follow criterion 5).
-For Online rows: Size from stated capacity or attendee count; if none, leave Approx Size blank and add "size not stated" to Table Creator Action Required. If the host is outside Europe and the event passes only on audience wording, say so in Table Creator Action Required.
+- Starts between 08:00 and 21:00 Zurich time — this replaces any test of where the host is based. Convert from the page's time zone and quote the time in the subagent return; if no time is stated, add it and flag "start time not stated".
+- Not a product sales webinar, and taking part doesn't require one vendor's product (e.g. "download X to hack along"). Keep it AI-skills agnostic. Online, this is stricter than criterion 5: a hands-on session built on one vendor's tool fails.
+For Online rows: Size from stated capacity or attendee count; if none, leave Approx Size blank and add "size not stated" to Table Creator Action Required. Note the host's location in Why only if it helps members (e.g. "run by the AI Collective's Stockholm chapter").
 
 Technical events (developer meetups, hackathons, research talks) are allowed; tag For accurately so members can filter.
 
