@@ -13,6 +13,14 @@ Each entry says **what** changed, **why**, and **who it affects** (people browsi
 
 ---
 
+## v1.4.2 · 10 Nov 2026 · Landing page announces online events
+
+- **What:** The landing page now says the table includes selected online events: in the intro, in a note above the table, in a new "Format" entry under "How to read the table", and in "What's next", where online events are marked live on trial.
+- **Why:** Online rows were already showing in the public table, but nothing on the page explained them.
+- **Affects:** People browsing. No change to the table or the scan.
+
+---
+
 ## v1.4.1 · 10 Nov 2026 · Online events: time window replaces the Europe-host test
 
 - **What:**
