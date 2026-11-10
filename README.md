@@ -17,13 +17,13 @@ Maintained by [Wendy Look](https://www.linkedin.com/in/wendylook/).
 3. **Publish.** New rows go public straight away, labelled *Not verified*, so people hear about events early. Rejected rows are hidden.
 4. **Review.** Every Monday a reminder lists the unverified rows, date and link problems first. I mark each one *Verified* or *Rejected*. The assistant never verifies anything.
 
-What gets in today: in-person events in Switzerland where AI is the main theme, run in English, with a page where you can register for that specific event (events listed only on calendars or aggregator sites are left out). Pitch nights, investor events, job fairs and trade shows are left out. The full criteria are in §6 of the rulebook.
+What gets in today: in-person events in Switzerland, and (on trial since Nov 2026) online events run by a Swiss or European host or explicitly aimed at people in European time zones, where AI is the main theme, run in English, with a page where you can register for that specific event (events listed only on calendars or aggregator sites are left out). Pitch nights, investor events, job fairs and trade shows are left out. The full criteria are in §6 of the rulebook.
 
 ## What's next
 
 These are planned and not yet live. See the release notes for status.
 
-- **Selected virtual events.** Learning opportunities that are skills-focused and not built around selling one product.
+- **Selected virtual events** (in trial since v1.4). Learning opportunities that are skills-focused and not built around selling one product.
 - **German-language events.**
 - **A feedback form** that writes straight to the table.
 
