@@ -1,17 +1,17 @@
 ---
 name: ewai-event-scan
-description: Scan Swiss AI event sources and maintain the EWAI Airtable events table — find new in-person, English-language AI events in Switzerland, verify dates and registration links, re-check existing rows, and write them as "Not verified". Use when asked to run the EWAI event scan (full or light), re-check event links, or add events to the EWAI table.
+description: Scan Swiss AI event sources and maintain the EWAI Airtable events table — find new English-language AI events in Switzerland plus Europe-relevant online events, verify dates and registration links, re-check existing rows, and write them as "Not verified". Use when asked to run the EWAI event scan (full or light), re-check event links, or add events to the EWAI table.
 ---
 
 # EWAI event scan
 
-You maintain an Airtable table of AI events in Switzerland for EWAI, a Swiss peer community for professional women aged 30–55 navigating AI without a technical background. Members read this table and register for events from it, so every fact must be true and every link must work. A missing event costs little; a wrong date or dead link costs a member's trust. When in doubt, leave a field honest ("TBC", "not stated") rather than complete.
+You maintain an Airtable table of AI events in Switzerland (plus online events that suit people in Switzerland) for EWAI, a Swiss peer community for professional women aged 30–55 navigating AI without a technical background. Members read this table and register for events from it, so every fact must be true and every link must work. A missing event costs little; a wrong date or dead link costs a member's trust. When in doubt, leave a field honest ("TBC", "not stated") rather than complete.
 
 ## 0. Setup (do this first)
 
 1. Run `TZ=Europe/Zurich date +"%Y-%m-%d %u"` and write the result at the top of your notes as TODAY and WEEKDAY (1 = Monday). Use TODAY for "Added on", "Last checked" and all "checked YYYY-MM-DD" notes. TODAY is never an event date.
 2. Run mode: WEEKDAY = 1 (Monday) or any day other than Friday → FULL. WEEKDAY = 5 (Friday) → LIGHT. LIGHT = Tier 1 sources + recurring-series check + link check only.
-3. Window: events physically in Switzerland, dated TODAY through TODAY + 90 days in FULL mode, or TODAY through TODAY + 14 days in LIGHT mode (new events only; the link check in §3 is unchanged). Exception: in FULL mode, recurring-series sessions use a 30-day window (§4).
+3. Window: events physically in Switzerland, or online events that pass the online rule (§6), dated TODAY through TODAY + 90 days in FULL mode, or TODAY through TODAY + 14 days in LIGHT mode (new events only; the link check in §3 is unchanged). Exception: in FULL mode, recurring-series sessions use a 30-day window (§4).
 
 ## 1. Airtable reference (use these IDs; don't rediscover the schema)
 
@@ -26,7 +26,8 @@ Base `<BASE_ID>`, table `<TABLE_ID>`. (Copying this setup? Replace these and the
 | Domain | fldNXv7VH4z9Cg423 | see §6 |
 | Category | fldO5S7gDJWFYMFQO | Meetup · Panel + Apéro · Small Group · Networking · Large Conference · Hackathon · Workshop · Talk · Public & Community |
 | Approx Size | fldtuU4VN1LIA6gtu | Small · Medium · Large (only these three) |
-| Location | fldchXksj2JXEX2Jl | venue, city |
+| Format | fldgcgIVjRYTdV9QP | In-person · Online · Hybrid (always fill; Hybrid = in Switzerland with an online option) |
+| Location | fldchXksj2JXEX2Jl | venue, city; for Online rows "Online (platform)", e.g. "Online (Zoom)", or "Online" if the platform isn't stated |
 | Cost | fldhkHcHlKFRDqAsR | "CHF n" · "Free" · "Invite-only" · "TBC" |
 | Registration Link | fldeLthNufDpgbz2n | URL |
 | Registration | fldKR6Rt6A3oplo4H | Open · Closed (definitions in §5; field formerly named Link Status) |
@@ -96,13 +97,19 @@ Recurring series — every run (both modes):
 - Luma calendar pages usually list sessions without dates; a session's date must still come from an allowed source (§5) — the organiser's events page counts as the organiser's site.
 - FULL mode: no cap — check every series, add only sessions dated within the next 30 days (later sessions are picked up by later runs), and this step is never skipped or cut short for budget. LIGHT mode: about 8 page fetches for this step; if you hit that, list the series you didn't check in the summary.
 
+Online events — FULL mode only (trial, started 2026-11-10):
+- Online events that turn up in any source above are candidates; don't skip them for being online.
+- Web searches (one each): "AI webinar Europe [month year]", "AI online event CET [month year]", "online AI meetup Europe women [month year]", "site:luma.com AI online Europe".
+- Recurring online series already in the table are covered by the recurring-series check.
+- Cap: about 20 page fetches for online discovery; online candidates never displace Luma or the recurring-series check.
+
 Known dead ends — don't spend calls on them: womentechswitzerland.com and wetechtogether.ch (block fetching — never work around a block), Eventbrite city search pages (/d/…), Meetup's /find search, Impact Hub Zurich's events page (JavaScript calendar, no events in the text — its events show up on Luma/ai-weeks.ch instead), luma.com/basel (unrelated calendar), Eventfrog category pages such as /en/events/ch/digital-ai.html (silently fall back to the generic list) and api.eventfrog.net.
 
 If a source fails, note it and move on.
 
 ### Cheap filter before opening any event page
 
-From the listing text alone, drop anything that: is already in the dedupe list (same normalised name, date within 1 day) or Rejected; is dated outside the window; is titled or described only in German/French/Italian; says online/webinar/livestream; is a pitch night, investor event or job fair; is clearly not about AI. Only open event pages for what remains.
+From the listing text alone, drop anything that: is already in the dedupe list (same normalised name, date within 1 day) or Rejected; is dated outside the window; is titled or described only in German/French/Italian; is online but clearly fails the online rule (§6) — e.g. a product demo or a host and audience outside Europe; is a pitch night, investor event or job fair; is clearly not about AI. Only open event pages for what remains.
 
 ### Budget
 
@@ -154,15 +161,22 @@ Never infer:
 ## 6. Criteria and tagging
 
 Add an event only if all are true:
-1. Physically in Switzerland.
+1. Format fits: In-person or Hybrid → physically in Switzerland. Online → passes the online rule below.
 2. AI is the main theme — in the title, or most of the programme. One AI panel/track inside a broader conference doesn't count. Networking events with no AI theme don't count.
 3. Run in English (bilingual counts).
-4. In person (no online-only, no webinars).
+4. Live (no on-demand recordings or pre-recorded webinars; the owner adds recordings by hand).
 5. Not a recruiting fair, trade show or student-only event. Vendor-run events with practical content (hands-on labs, workshops, masterclasses) are welcome — name the company in Why. Exclude pure sales pitches and booth expos.
 6. Not an investor, pitch or fundraising event (pitch nights, investor summits/days, VC nights, investor/executive dinners, founder–investor matchmaking) — these are investor-community discussions, not practical AI knowledge for members.
 7. Not a templated or low-quality listing (copied text mentioning another country, "TBD" venue with many identical dates, "AI SaaS / prompt to profit" lead-gen series).
 8. Has a registration page for this specific event (§5).
 9. Not already in the table (any status).
+
+Online rule — an Online event passes only if all are true:
+- Europe-relevant: the host is a Swiss or European organisation or community, OR the page or audience description explicitly says it is for people in Europe / European time zones (e.g. "EU edition", times given in CET/CEST, "for Europe-based"). Quote the wording in the subagent return.
+- Interactive: at least live Q&A, discussion, breakouts, demos by participants or hands-on work. Broadcast-only keynotes and large livestreams fail.
+- Starts between 08:00 and 21:00 Zurich time. If only a non-European time zone is given, convert it; if no time is stated, add it and flag "start time not stated".
+- Not a product sales webinar or a session promoting one vendor's tool. Keep it AI-skills agnostic (vendor-run practical sessions follow criterion 5).
+For Online rows: Size from stated capacity or attendee count; if none, leave Approx Size blank and add "size not stated" to Table Creator Action Required. If the host is outside Europe and the event passes only on audience wording, say so in Table Creator Action Required.
 
 Technical events (developer meetups, hackathons, research talks) are allowed; tag For accurately so members can filter.
 
@@ -190,12 +204,13 @@ For each new event fill every field in §1. Field content rules:
 - Why — one sentence for members: what it is plus useful facts from the page (named speakers, who runs it, discount code, women-only, non-developers welcome, bring a laptop, multi-day range). No doubts, no internal commentary.
 - Notes — practical facts with the date checked (approval required, waitlist, "2 spots left, checked YYYY-MM-DD", apply-by date, unusual way to register, venue outside the centre). Blank if none. No doubts.
 - Table Creator Action Required — blank if the event passed every rule cleanly; otherwise what the owner should check. All doubts go here and only here.
+- Format = In-person, Online or Hybrid (never blank).
 - Last checked = TODAY; Status = Not verified; Added by = Agent; Added on = TODAY.
 
 ## 8. Finish
 
 Write the summary:
-- run mode; events added by Type and by Source; how many have something in Table Creator Action Required
+- run mode; events added by Type, by Format and by Source; how many have something in Table Creator Action Required
 - existing rows fixed (link, date, venue, registration status)
 - Verified rows with problems (not modified)
 - Skipped: no registration page — one line each: name, date, where you saw it

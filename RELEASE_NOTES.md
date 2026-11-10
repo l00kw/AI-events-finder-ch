@@ -13,6 +13,24 @@ Each entry says **what** changed, **why**, and **who it affects** (people browsi
 
 ---
 
+## v1.4 · 10 Nov 2026 · Online events, on trial
+
+- **What:**
+  - **New Format column:** In-person, Online or Hybrid. All 223 existing rows were set to In-person. Format shows in the public view and in "Older events". Online rows say "Online (platform)" in Location.
+  - **Online events can now be added, if they pass the online rule:**
+    - run by a Swiss or European host, **or** the page explicitly says it's for people in European time zones (for example an "EU edition");
+    - interactive: at least live Q&A, discussion or hands-on work, not a broadcast-only livestream;
+    - starts between 08:00 and 21:00 Zurich time;
+    - not a product sales webinar, and not tied to one vendor's tool.
+  - The usual rules still apply: AI is the main theme, run in English, and it has its own registration page. Recordings aren't added by the scan. The table owner adds them by hand.
+  - The scan looks for online events in its existing sources and through a few extra searches on full (Monday) runs, capped at about 20 page loads.
+  - Online events appear in the main public list alongside in-person ones.
+  - Two recent examples were added by hand to try the format: the VCM Demo Night 07 (EU Edition, with European Women in AI) and the University of St.Gallen webinar "AI Agents in Management". Both are past events.
+- **Why:** Good learning events happen online too, and some are aimed specifically at Europe. Two recent ones didn't appear because the rulebook excluded anything online. The Europe-host-or-audience rule keeps the list relevant to people in Switzerland without listing every webinar worldwide. It's a trial so online events can be counted against in-person ones before deciding whether they need their own table.
+- **Affects:** People browsing will see some Online rows. Filter on Format if you only want in-person events. Reviewer: online rows have their own checks (host, audience wording, start time). People copying the setup need to add the Format field.
+
+---
+
 ## v1.3 · 4–5 Nov 2026 · Recurring series checked at the source, and shorter look-ahead windows
 
 - **What:**
