@@ -2,13 +2,15 @@
 
 Used by the weekly release-notes check to spot changes to the table's setup. Generated, don't edit by hand.
 
-Taken: 2026-11-05
+Taken: 2026-11-16
 
 ## Fields (table order)
 
 - **Day & Date** · formula (primary field) · `IF({Date}, DATETIME_FORMAT({Date}, 'ddd, MMM D YYYY'), '')`
   - description: Read-only display of the Date field with the weekday, e.g. "Sat, Oct 3 2026". Sort and filter on Date, not on this field.
 - **Event Name** · singleLineText
+- **Why** · richText
+  - description: One line on why this passed the filter and what a member should know
 - **Domain** · multipleSelects
   - description: What the event is about (topic), as opposed to For (who it's aimed at). Pick 1-3, most specific first.
   - options: Generative AI & LLMs | AI Agents | AI at Work & Productivity | AI Strategy & Business | AI Governance, Ethics & Law | AI Safety & Alignment | Security | MLOps & AI Engineering | Data & Analytics | Machine Learning Research | Robotics & Physical AI | Healthcare & Life Sciences | Finance & Fintech | Product & Design | Open-Source & Sovereign AI | Sustainability & Society | Language AI | Startups & Innovation | Cybersecurity
@@ -19,8 +21,6 @@ Taken: 2026-11-05
 - **Registration** · singleSelect
   - description: Open = the Registration Link opened this event's registration page on the Last checked date and registration was open. Closed = same page, but full, sold out or waiting list only.
   - options: Open | Closed
-- **Why** · richText
-  - description: One line on why this passed the filter and what a member should know
 - **Type** · singleSelect
   - description: Connect = meeting people is the point. Learn = content-first or hands-on.
   - options: Connect | Learn
@@ -30,6 +30,9 @@ Taken: 2026-11-05
   - options: Panel + Apéro | Meetup | Small Group | Large Conference | Networking | Hackathon | Workshop | Public & Community | Talk
 - **Approx Size** · singleSelect
   - options: Small | Medium | Large | Small-Medium | Large (600)
+- **Format** · singleSelect
+  - description: In-person = physically in Switzerland. Online = virtual only (Location says the platform). Hybrid = in Switzerland with an online option.
+  - options: In-person | Online | Hybrid
 - **Location** · singleLineText
 - **Source** · singleSelect
   - description: Where the event was found
@@ -53,12 +56,17 @@ Taken: 2026-11-05
 ### Grid view (public)
 - filter: Date >= today (Europe/Zurich) AND Status != Rejected
 - sort: Date ascending
-- visible: Day & Date, Event Name, Domain, For, Registration Link, Registration, Why, Type, Cost, Category, Approx Size, Location, Source, Notes, Last checked, Status
+- visible: Day & Date, Event Name, Why, Domain, For, Registration Link, Registration, Type, Cost, Category, Approx Size, Format, Location, Source, Notes, Last checked, Status
+
+### Online events view
+- filter: Date >= today (Europe/Zurich) AND Format = Online AND Status != Rejected
+- sort: Date ascending
+- visible: Day & Date, Event Name, Why, Domain, For, Registration Link, Registration, Type, Cost, Category, Approx Size, Format, Location, Source, Notes, Last checked, Status
 
 ### Older events
-- filter: Date < today (GMT)
-- sort: Date ascending
-- visible: Day & Date, Date, Event Name, Why, For, Cost, Category, Approx Size, Location, Registration Link, Source, Notes, Type
+- filter: Date < today (Europe/Zurich)
+- sort: Date descending
+- visible: Day & Date, Date, Event Name, Why, For, Cost, Category, Approx Size, Format, Location, Registration Link, Source, Notes, Type
 
 ### To Review
 - filter: Date >= today (Europe/Zurich) AND Status = Not verified
@@ -68,9 +76,9 @@ Taken: 2026-11-05
 ### Rejected events
 - filter: Status = Rejected
 - sort: none
-- visible: Day & Date, Date, Event Name, Status, Registration Link, For, Category, Approx Size, Location, Cost, Source, Notes, Registration, Type, Why, Added by, Added on, Table Creator Action Required, Domain, Last checked
+- visible: Day & Date, Date, Event Name, Status, Registration Link, For, Category, Approx Size, Location, Cost, Source, Notes, Registration, Type, Why, Added by, Added on, Table Creator Action Required, Domain, Last checked, Format
 
 ### All columns view
 - filter: none
 - sort: Date ascending
-- visible: Day & Date, Date, Event Name, Registration, Registration Link, Status, Added by, Added on, Table Creator Action Required, Last checked
+- visible: Day & Date, Event Name, Registration, Registration Link, For, Status, Added by, Added on, Table Creator Action Required, Last checked

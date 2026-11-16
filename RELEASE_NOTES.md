@@ -13,6 +13,27 @@ Each entry says **what** changed, **why**, and **who it affects** (people browsi
 
 ---
 
+## v1.5 · 2026-11-16 · Why column moved up, Online events view, new scan time
+
+- **What:**
+  - **Table**
+    - The Why field moved up to third place, right after Event Name. The public view (Grid view) now shows Why third too, before Domain.
+    - Format field (In-person | Online | Hybrid) now recorded in this snapshot, with its description. It was added in v1.4; the setup snapshot hadn't caught up. Format also shows in the public view (after Approx Size), in "Older events" (after Approx Size) and, new, at the end of "Rejected events".
+    - New view "Online events view": upcoming events (Date today or later, Zurich time) with Format = Online and Status not Rejected, sorted by Date, showing the same columns as the public view.
+    - "Older events" now lists the most recent events first (was oldest first), and "today" is now Zurich time (was GMT).
+    - "All columns view" no longer shows Date; it now shows For (after Registration Link).
+  - **Scheduled scan**
+    - Scheduled scan: now runs Monday and Friday at 05:32 Zurich time, all year (was 05:00 UTC, i.e. 06:00 Zurich in winter and 07:00 in summer). Instructions, model and notifications are unchanged.
+- **Why:**
+  - Why column moved: **To fill in:** why did you make this change?
+  - Online events view: **To fill in:** why did you make this change?
+  - Older events order and time zone: **To fill in:** why did you make this change?
+  - All columns view: **To fill in:** why did you make this change?
+  - Scan time: **To fill in:** why did you make this change?
+- **Affects:** People browsing see Why earlier in the public table, can open an online-only list, and see past events newest first; people copying the setup need the new view and column order; scan results now arrive at the same local time year-round. (check)
+
+---
+
 ## v1.4.2 · 10 Nov 2026 · Landing page announces online events
 
 - **What:** The landing page now says the table includes selected online events: in the intro, in a note above the table, in a new "Format" entry under "How to read the table", and in "What's next", where online events are marked live on trial.
